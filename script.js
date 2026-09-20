@@ -104,7 +104,40 @@ window.addEventListener('scroll', onScroll);
 onScroll(); // run once on load in case the page opens mid-scroll
 
 
-// ---------- 2) Hero banner carousel ----------
+// ---------- 2) Mobile nav menu ----------
+// Below 980px wide, the header hides the normal nav links and shows this
+// burger button instead (see style.css, ".navlinks{display:none}" and
+// ".burger{display:block}" inside the 980px breakpoint) — this is what
+// makes tapping it actually open a menu with those same links, which it
+// previously didn't do at all.
+const burgerButton = document.getElementById('burgerButton');
+const mobileNav = document.getElementById('mobileNav');
+const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+
+function closeMobileNav() {
+  mobileNav.classList.remove('open');
+  mobileNavOverlay.classList.remove('open');
+  burgerButton.setAttribute('aria-expanded', 'false');
+}
+
+function toggleMobileNav() {
+  const isOpen = mobileNav.classList.toggle('open');
+  mobileNavOverlay.classList.toggle('open', isOpen);
+  burgerButton.setAttribute('aria-expanded', String(isOpen));
+}
+
+if (burgerButton) {
+  burgerButton.addEventListener('click', toggleMobileNav);
+  mobileNavOverlay.addEventListener('click', closeMobileNav);
+  // Closes the menu after tapping any link inside it — otherwise it
+  // would stay open, covering the page you just navigated to.
+  mobileNav.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', closeMobileNav);
+  });
+}
+
+
+// ---------- 3) Hero banner carousel ----------
 // Auto-advances every 6 seconds, pauses while the visitor's mouse is over
 // the hero, and can be controlled manually with the dots or the arrow
 // buttons (either of which also resets the auto-advance timer, so it
@@ -165,7 +198,7 @@ if (heroCarousel && heroSlides.length > 1) {
 }
 
 
-// ---------- 3) "Featured / New / Top Rated" product tabs ----------
+// ---------- 4) "Featured / New / Top Rated" product tabs ----------
 tabs.forEach((tab) => {
   tab.addEventListener('click', () => {
     tabs.forEach((t) => t.classList.remove('active'));
@@ -177,7 +210,7 @@ tabs.forEach((tab) => {
 });
 
 
-// ---------- 4) Loading each page's text from the #pageSources block ----------
+// ---------- 5) Loading each page's text from the #pageSources block ----------
 // The wording for each "Pages" dropdown entry is written directly in
 // index.html inside <div id="pageSources" hidden> — one <div data-page="...">
 // per page, holding its <p> paragraphs. Reading it here is just copying
@@ -197,7 +230,7 @@ function loadPageText(pageName) {
 }
 
 
-// ---------- 5) Scroll-reveal animation (used on the About Us page) ----------
+// ---------- 6) Scroll-reveal animation (used on the About Us page) ----------
 // Any element marked data-reveal fades/slides into place once it scrolls
 // into view, rather than just appearing instantly. This is written to work
 // on whichever page is currently showing, not just About Us specifically —
@@ -233,7 +266,7 @@ function initScrollReveal() {
 }
 
 
-// ---------- 6) Switching between the homepage, a "Pages" sub-page, and the Shop page ----------
+// ---------- 7) Switching between the homepage, a "Pages" sub-page, and the Shop page ----------
 // All three sections are siblings that get shown/hidden together, so this
 // one helper is the single place that decides which one is visible.
 function setActiveSection(section) {
@@ -316,7 +349,7 @@ shopNavLinks.forEach((link) => {
 });
 
 
-// ---------- 7) Shop page: category filter + sorting ----------
+// ---------- 8) Shop page: category filter + sorting ----------
 // Products are plain HTML (<article class="product-card">) rather than
 // data pulled from JS, which keeps things simple — filtering/sorting just
 // hides cards or reorders the existing elements in the page, it doesn't
@@ -390,7 +423,7 @@ function formatPrice(amount) {
 }
 
 
-// ---------- 8) Shopping cart ----------
+// ---------- 9) Shopping cart ----------
 // Cart items are saved to localStorage, so the cart survives a page
 // refresh (but is specific to this browser — there's no server involved).
 const CART_STORAGE_KEY = 'courtiva-cart';
@@ -662,7 +695,7 @@ initPayPalCheckout();
 updateCartUI();
 
 
-// ---------- 9) Reading a product card's details ----------
+// ---------- 10) Reading a product card's details ----------
 // Both Quick View and the Product Overview page need the same
 // information out of whichever <article class="product-card"> was
 // clicked, so it's pulled together here once instead of twice.
@@ -689,7 +722,7 @@ function getProductDataFromCard(card) {
 }
 
 
-// ---------- 10) Quick View modal ----------
+// ---------- 11) Quick View modal ----------
 // Clicking "Quick View" on a product card reads that card's details
 // (via getProductDataFromCard above) and fills in the modal, rather
 // than needing a separate page or a second copy of each product's
@@ -799,7 +832,7 @@ quickViewShare.addEventListener('click', async () => {
 });
 
 
-// ---------- 11) Product Overview Page ----------
+// ---------- 12) Product Overview Page ----------
 // One page template, filled in with whichever product was clicked —
 // see getProductDataFromCard() above for where the details come from.
 // Clicking a product's photo or name (anywhere: Shop page, Featured
@@ -1048,7 +1081,7 @@ productShare.addEventListener('click', async () => {
 });
 
 
-// ---------- 12) Wishlist ----------
+// ---------- 13) Wishlist ----------
 // A single shared wishlist (an array of product names) drives the heart
 // icon on every product card, the header count badge, and the Wishlist
 // page's table — they all read/write the same localStorage-backed
@@ -1292,7 +1325,7 @@ updateWishlistBadge();
 syncWishlistIcons();
 
 
-// ---------- 13) Product catalog: loaded from media/products/ ----------
+// ---------- 14) Product catalog: loaded from media/products/ ----------
 // This is what makes adding/removing/editing products "plug and play" —
 // every product card on the site (Shop page AND Featured Products) is
 // built from data read out of media/products/manifest.json and each
@@ -1489,7 +1522,7 @@ async function loadProductCatalog() {
 loadProductCatalog();
 
 
-// ---------- 14) Newsletter signup form (front-end only demo) ----------
+// ---------- 15) Newsletter signup form (front-end only demo) ----------
 if (signupForm) {
   signupForm.addEventListener('submit', (event) => {
     event.preventDefault();

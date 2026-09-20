@@ -83,6 +83,35 @@ header.scrolled .navlinks a{color:var(--ink-soft);}
 .burger svg{width:22px;height:22px;color:var(--white);}
 header.scrolled .burger svg{color:var(--ink);}
 
+/* ---------- MOBILE NAV MENU ---------- */
+/* Hidden by default at every width; only ever shown once JS adds .open
+   (see script.js, "Mobile nav menu"), and only reachable at all once
+   the burger button itself becomes visible below 980px. */
+.mobile-nav{
+  display:none;
+  position:absolute;top:100%;left:0;right:0;z-index:60;
+  background:var(--white);
+  flex-direction:column;
+  padding:8px 0;
+  box-shadow:0 18px 30px rgba(20,18,14,.14);
+  border-top:1px solid var(--line);
+}
+.mobile-nav.open{display:flex;}
+.mobile-nav a{
+  padding:16px 28px;
+  font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);
+  border-bottom:1px solid var(--line);
+}
+.mobile-nav a:last-child{border-bottom:none;}
+.mobile-nav a:hover{background:var(--cream-deep);}
+
+.mobile-nav-overlay{
+  display:none;
+  position:fixed;inset:0;z-index:55;
+  background:rgba(20,18,14,.35);
+}
+.mobile-nav-overlay.open{display:block;}
+
 /* ---------- SHOP PAGE ---------- */
 .shop-page{padding-top:80px;} /* clears the fixed header */
 
@@ -631,7 +660,7 @@ header.scrolled .burger svg{color:var(--ink);}
   /* full-bleed: breaks out of the page's centered max-width container so
      the background/photo can run edge-to-edge under the fixed header */
   position:relative;width:100vw;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;
-  display:grid;grid-template-columns:0.75fr 1.25fr;align-items:stretch;
+  display:grid;grid-template-columns:1fr 1fr;align-items:stretch;
   background:#CC9670;
   min-height:620px;
 }
@@ -775,7 +804,7 @@ header.scrolled .burger svg{color:var(--ink);}
   text-align:left;
 }
 .hero-tagline{
-  font-family:'Casanova Serif',sans-serif;font-style:bold;font-weight:300;
+  font-family:'Poppins',sans-serif;font-style:bold;font-weight:300;
   font-size:clamp(22px,3vw,34px);line-height:1.25;
   margin-bottom:16px;max-width:420px;
   text-shadow:0 2px 14px rgba(0,0,0,.35); /* keeps it legible over busy/light parts of a photo */
