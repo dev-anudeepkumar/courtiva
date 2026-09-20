@@ -1,0 +1,21 @@
+{
+  "name": "Sena",
+  "brand": "Courtiva",
+  "price": 150.0,
+  "compareAtPrice": null,
+  "category": "sportswear",
+  "description": "An open-stitch knit pullover with a relaxed fit and a drawstring hem, light enough to layer over anything.",
+  "tagline": "Grace in every serve",
+  "image": "image.jpg",
+  "badgeSale": null,
+  "badgeFeatured": true,
+  "badgeBestseller": false,
+  "badgeOutOfStock": false,
+  "rating": false,
+  "images": [
+    "image.png",
+    "image-2.png",
+    "image-3.png",
+    "image-4.png"
+  ]
+}

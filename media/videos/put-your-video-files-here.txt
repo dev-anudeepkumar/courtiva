@@ -1,0 +1,11 @@
+This folder doesn't have any videos in it yet, since the site
+currently doesn't use any.
+
+If you add a video to the site later (e.g. a hero background video,
+a product demo clip), save it in this folder and reference it in
+index.html with a relative path, e.g.:
+
+  <video src="media/videos/your-file.mp4" autoplay muted loop></video>
+
+Common web video format: .mp4 (H.264) — supported by all browsers.
+Keep file sizes reasonable (a few MB at most) so the page loads quickly.

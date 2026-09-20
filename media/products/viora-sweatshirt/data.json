@@ -1,0 +1,21 @@
+{
+  "name": "Viora",
+  "brand": "Courtiva",
+  "price": 320.0,
+  "compareAtPrice": null,
+  "category": "sportswear",
+  "description": "Fresh and dynamic, light movement, sporty elegance. A V-neckline with lateral mesh panels delivers breathability and freedom — designed for the athlete in full flight.",
+  "tagline": "",
+  "image": "image.jpg",
+  "badgeSale": null,
+  "badgeFeatured": false,
+  "badgeBestseller": false,
+  "badgeOutOfStock": false,
+  "rating": false,
+  "images": [
+    "image.png",
+    "image-2.png",
+    "image-3.png",
+    "image-4.png"
+  ]
+}

@@ -1,0 +1,11 @@
+This folder doesn't have any GIFs in it yet, since the site
+currently doesn't use any.
+
+If you add a GIF later, save it in this folder and reference it
+like any other image, e.g.:
+
+  <img src="media/gifs/your-file.gif" alt="Describe what it shows">
+
+Note: GIFs are often much larger in file size than a JPG/PNG for the
+same content. For anything more than a few seconds, consider a short
+.mp4 in the /videos folder instead — it will load faster.

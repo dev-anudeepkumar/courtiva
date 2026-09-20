@@ -1,0 +1,1157 @@
+:root{
+  --cream:#FFFFFF;
+  --cream-deep:#F3E9CE;
+  --ink:#1A1815;
+  --ink-soft:#5B564C;
+  --gray:#A39A87;
+  --line:#E5D8B0;
+  --olive:#9C7A28;
+  --olive-dark:#6E5518;
+  --white:#FFFFFF;
+  --maxw:1280px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Poppins', sans-serif;
+  color:var(--ink);
+  background:var(--cream);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px;}
+.eyebrow{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--olive-dark);font-weight:600;
+}
+
+/* ---------- HEADER ---------- */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(245,240,230,0);
+  transition:background .35s ease, box-shadow .35s ease, backdrop-filter .35s ease;
+}
+header.scrolled{
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(8px);
+  box-shadow:0 1px 0 var(--line);
+}
+.nav{
+  display:grid;
+  grid-template-columns:auto 1fr auto; /* logo | centered nav | icons — logo/icons keep their natural width, nav gets the rest and is centered within it */
+  align-items:center;gap:24px;
+  max-width:var(--maxw);margin:0 auto;padding:18px 40px;
+}
+.logo{
+  display:flex;align-items:center;
+  justify-self:start; /* pins the logo to the far left of its grid cell */
+}
+.logo img{
+  height:38px;width:auto;display:block;
+  transition:opacity .25s;
+}
+.logo:hover img{opacity:.8;}
+header.scrolled .navlinks a, header.scrolled .icons svg{ color:var(--ink); }
+.navlinks{
+  display:flex;gap:38px;justify-content:center; /* centers the nav links within the middle grid column */
+}
+.navlinks a{
+  font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--white);
+  position:relative;padding-bottom:4px;
+  transition:opacity .25s;
+}
+header.scrolled .navlinks a{color:var(--ink-soft);}
+.navlinks a::after{
+  content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:currentColor;
+  transition:width .3s ease;
+}
+.navlinks a:hover::after{width:100%;}
+
+.nav-right{display:flex;align-items:center;gap:20px;justify-self:end;}
+.icons{display:flex;align-items:center;gap:20px;}
+.icons svg{width:18px;height:18px;color:var(--white);stroke-width:1.4;transition:color .25s;}
+.icons button{position:relative;display:flex;}
+.cart-count{
+  position:absolute;top:-7px;right:-8px;background:var(--olive);color:var(--white);
+  font-size:9px;width:15px;height:15px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+}
+.cart-count[hidden]{display:none;} /* author CSS can override the browser's default [hidden] behavior, so this makes sure it still works */
+.burger{display:none;background:none;border:none;}
+.burger svg{width:22px;height:22px;color:var(--white);}
+header.scrolled .burger svg{color:var(--ink);}
+
+/* ---------- SHOP PAGE ---------- */
+.shop-page{padding-top:80px;} /* clears the fixed header */
+
+.shop-promo-bar{
+  background:var(--ink);color:var(--white);
+  text-align:center;padding:10px 20px;
+  font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+}
+
+.shop-toolbar{
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;
+  padding-top:22px;padding-bottom:22px;border-bottom:1px solid var(--line);
+}
+.shop-results-count{font-size:12px;color:var(--gray);letter-spacing:.04em;text-transform:uppercase;}
+.shop-breadcrumb{font-size:12px;color:var(--gray);letter-spacing:.04em;text-transform:uppercase;}
+.shop-breadcrumb a{color:var(--ink-soft);}
+.shop-breadcrumb a:hover{color:var(--ink);text-decoration:underline;}
+.shop-breadcrumb span:first-of-type{margin:0 8px;}
+.shop-toolbar-right{display:flex;align-items:center;gap:14px;}
+.sort-select-wrap select{
+  border:1px solid var(--line);background:var(--white);
+  padding:10px 14px;font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--ink-soft);font-family:'Poppins',sans-serif;
+}
+.filter-btn{
+  border:1px solid var(--ink);background:var(--ink);color:var(--white);
+  padding:11px 22px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+}
+
+.shop-heading-row{
+  display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:30px;
+  padding-top:50px;padding-bottom:40px;
+}
+.shop-heading-row h1{
+  font-family:'Poppins',sans-serif;font-weight:500;font-size:44px;
+  position:relative;padding-bottom:16px;
+}
+.shop-heading-row h1::after{
+  content:"";position:absolute;left:1px;bottom:0;width:56px;height:3px;background:var(--olive-dark);
+}
+
+.category-tiles{display:flex;gap:14px;flex-wrap:wrap;}
+.category-tile{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  width:104px;padding:18px 10px;
+  border:1px solid var(--line);background:var(--white);
+  transition:border-color .25s, background .25s;
+}
+.category-tile svg{width:28px;height:28px;color:var(--ink-soft);transition:color .25s;}
+.category-tile span{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);}
+.category-tile:hover{border-color:var(--olive);}
+.category-tile.active{border-color:var(--ink);background:var(--cream-deep);}
+.category-tile.active svg, .category-tile.active span{color:var(--ink);}
+
+.shop-empty{
+  text-align:center;color:var(--gray);font-size:13px;padding:60px 40px;
+}
+.shop-empty[hidden]{display:none;}
+
+.catalog-error{
+  grid-column:1/-1; /* span the full grid width instead of sitting in one column */
+  text-align:center;color:var(--ink-soft);font-size:14px;line-height:1.7;
+  padding:60px 30px;background:var(--cream-deep);
+}
+
+.shop-grid{padding-bottom:60px;}
+.shop-grid .product-card[hidden]{display:none;}
+
+/* extra product-card details used only on the Shop page */
+.product-brand{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);margin-bottom:4px;}
+.product-top-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:4px;}
+.product-top-row .product-brand{margin-bottom:0;}
+.product-rating{font-size:11px;color:var(--olive-dark);white-space:nowrap;}
+.price-sep{margin:0 4px;color:var(--gray);}
+.price-original{color:var(--gray);text-decoration:line-through;margin-left:8px;font-size:12px;}
+.swatches{display:flex;gap:6px;margin:10px 2px 0;}
+.swatch{width:14px;height:14px;border-radius:50%;border:1px solid rgba(0,0,0,.15);display:inline-block;}
+
+.tag-bestseller, .tag-sale, .tag-featured{
+  font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 10px;background:var(--ink);color:var(--white);
+}
+.tag-sale{background:var(--olive);}
+.tag-outofstock{
+  font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 10px;background:var(--white);color:var(--ink);border:1px solid var(--ink);
+}
+
+.stock-bar{height:4px;background:var(--line);border-radius:2px;overflow:hidden;margin-top:12px;}
+.stock-fill{height:100%;background:var(--olive);}
+.stock-info{
+  display:flex;justify-content:space-between;
+  font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--gray);margin-top:6px;
+}
+
+.pagination{display:flex;justify-content:center;gap:12px;padding-bottom:100px;}
+.page-btn{
+  width:38px;height:38px;border-radius:50%;border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;color:var(--ink-soft);transition:border-color .25s, color .25s;
+}
+.page-btn:hover, .page-btn.active{border-color:var(--ink);color:var(--ink);}
+.page-next{font-size:18px;border:none;}
+
+@media(max-width:768px){
+  .shop-toolbar{padding:18px 24px;}
+  .shop-heading-row{padding:36px 0 28px;}
+  .category-tiles{width:100%;justify-content:space-between;}
+  .category-tile{width:auto;flex:1;min-width:70px;padding:14px 6px;}
+}
+
+/* ---------- WISHLIST PAGE ---------- */
+.wishlist-page{padding-top:96px;}
+
+.wishlist-heading-row{
+  display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;
+  padding:40px 0 34px;
+}
+.wishlist-heading-row h1{font-family:'Poppins',sans-serif;font-weight:500;font-size:36px;}
+
+.wishlist-empty{
+  padding:60px 0;text-align:center;color:var(--gray);font-size:14px;
+}
+.wishlist-empty a{color:var(--olive-dark);text-decoration:underline;}
+.wishlist-empty[hidden]{display:none;}
+
+.wishlist-table{width:100%;border-collapse:collapse;margin-bottom:40px;table-layout:fixed;}
+.wishlist-table[hidden]{display:none;}
+.wishlist-col-product{width:44%;}
+.wishlist-col-price{width:20%;}
+.wishlist-col-stock{width:16%;}
+.wishlist-col-action{width:16%;}
+.wishlist-remove-cell{width:32px;}
+.wishlist-table thead th{
+  text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);
+  font-weight:400;padding:0 12px 16px;border-bottom:1px solid var(--line);
+}
+.wishlist-col-price, .wishlist-col-stock{text-align:center;}
+.wishlist-table tbody tr{border-bottom:1px solid var(--line);}
+.wishlist-table td{padding:20px 12px;vertical-align:middle;}
+
+.wishlist-remove-btn{
+  font-size:16px;color:var(--gray);width:24px;height:24px;
+  display:flex;align-items:center;justify-content:center;
+}
+.wishlist-remove-btn:hover{color:var(--ink);}
+
+.wishlist-product-cell{display:flex;align-items:center;gap:18px;}
+.wishlist-product-cell img{
+  width:56px;height:72px;object-fit:cover;background:var(--cream-deep);flex-shrink:0;
+}
+.wishlist-product-name{font-size:14px;color:var(--ink);}
+.wishlist-product-name:hover{text-decoration:underline;}
+
+.wishlist-col-price{text-align:center;font-size:14px;white-space:nowrap;}
+.wishlist-col-stock{text-align:center;}
+.wishlist-stock-badge{
+  font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--olive-dark);
+}
+
+.wishlist-col-action{text-align:right;}
+.wishlist-add-btn{
+  border:1px solid var(--ink);padding:12px 22px;
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  white-space:nowrap;transition:background .2s, color .2s;
+}
+.wishlist-add-btn:hover{background:var(--ink);color:var(--white);}
+
+.wishlist-share{
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;
+  padding:26px 0;border-top:1px solid var(--line);
+  font-size:12px;letter-spacing:.04em;
+}
+.wishlist-share[hidden]{display:none;}
+.wishlist-share-link{display:flex;gap:8px;flex-wrap:wrap;color:var(--ink-soft);}
+.wishlist-share-link span:first-child{text-transform:uppercase;letter-spacing:.1em;color:var(--gray);}
+.wishlist-share-link span:last-child{color:var(--olive-dark);word-break:break-all;}
+.wishlist-share-social{display:flex;align-items:center;gap:12px;}
+.wishlist-share-social span{text-transform:uppercase;letter-spacing:.1em;color:var(--gray);}
+.wishlist-share-social button{
+  width:30px;height:30px;border-radius:50%;border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;color:var(--ink-soft);
+  transition:border-color .2s, color .2s;
+}
+.wishlist-share-social button:hover{border-color:var(--ink);color:var(--ink);}
+.wishlist-share-social svg{width:15px;height:15px;}
+
+@media(max-width:700px){
+  .wishlist-table thead{display:none;}
+  .wishlist-table, .wishlist-table tbody, .wishlist-table tr, .wishlist-table td{display:block;width:100%;}
+  .wishlist-table tr{padding:18px 0;position:relative;}
+  .wishlist-remove-cell{position:absolute;top:18px;right:0;}
+  .wishlist-col-price, .wishlist-col-stock, .wishlist-col-action{text-align:left;padding-left:12px;}
+  .wishlist-col-action{margin-top:6px;}
+}
+
+/* ---------- CART DRAWER ---------- */
+.cart-overlay{
+  position:fixed;inset:0;background:rgba(20,18,14,.4);
+  opacity:0;visibility:hidden;transition:opacity .3s ease, visibility .3s;
+  z-index:200;
+}
+.cart-overlay.open{opacity:1;visibility:visible;}
+
+.cart-drawer{
+  position:fixed;top:0;right:0;bottom:0;
+  width:min(400px, 100%);
+  background:var(--white);
+  z-index:201;
+  display:flex;flex-direction:column;
+  transform:translateX(100%);
+  transition:transform .35s ease;
+  box-shadow:-10px 0 40px rgba(20,18,14,.15);
+}
+.cart-drawer.open{transform:translateX(0);}
+
+.cart-drawer-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:26px 28px;border-bottom:1px solid var(--line);
+}
+.cart-drawer-header h2{font-family:'Poppins',sans-serif;font-weight:500;font-size:20px;}
+.cart-close{font-size:26px;line-height:1;color:var(--ink-soft);padding:2px 6px;}
+.cart-close:hover{color:var(--ink);}
+
+.cart-items{flex:1;overflow-y:auto;padding:10px 28px;}
+.cart-empty{
+  text-align:center;color:var(--gray);font-size:13px;
+  padding:60px 28px;
+}
+.cart-empty[hidden]{display:none;}
+
+.cart-item{
+  display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:14px;
+  padding:18px 0;border-bottom:1px solid var(--line);
+}
+.cart-item-name{font-size:13px;font-weight:500;margin-bottom:4px;}
+.cart-item-price{font-size:12px;color:var(--gray);}
+.cart-item-qty{display:flex;align-items:center;gap:10px;}
+.qty-btn{
+  width:24px;height:24px;border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;color:var(--ink-soft);
+  transition:border-color .2s, color .2s;
+}
+.qty-btn:hover{border-color:var(--ink);color:var(--ink);}
+.cart-item-qty span{font-size:13px;min-width:14px;text-align:center;}
+.cart-item-remove{
+  font-size:18px;color:var(--gray);line-height:1;padding:2px 4px;
+}
+.cart-item-remove:hover{color:var(--ink);}
+
+.cart-drawer-footer{padding:22px 28px 28px;border-top:1px solid var(--line);}
+.cart-subtotal-row{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:14px;margin-bottom:18px;
+}
+.cart-subtotal-row span:last-child{font-weight:500;}
+.cart-checkout{width:100%;text-align:center;display:block;}
+
+/* ---------- QUICK VIEW MODAL ---------- */
+.quick-view-overlay{
+  position:fixed;inset:0;background:rgba(20,18,14,.5);
+  opacity:0;visibility:hidden;transition:opacity .3s ease, visibility .3s;
+  z-index:210;
+}
+.quick-view-overlay.open{opacity:1;visibility:visible;}
+
+.quick-view-modal{
+  position:fixed;top:50%;left:50%;
+  transform:translate(-50%, -48%);
+  width:min(880px, 92vw);
+  max-height:88vh;overflow-y:auto;
+  background:var(--white);
+  z-index:211;
+  display:grid;grid-template-columns:1fr 1fr;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .3s ease, transform .3s ease, visibility .3s;
+  box-shadow:0 30px 80px rgba(20,18,14,.3);
+}
+.quick-view-modal.open{
+  opacity:1;visibility:visible;pointer-events:auto;
+  transform:translate(-50%, -50%);
+}
+
+.quick-view-close{
+  position:absolute;top:18px;right:18px;z-index:2;
+  font-size:26px;line-height:1;color:var(--ink-soft);
+  width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+}
+.quick-view-close:hover{color:var(--ink);}
+
+.quick-view-media{position:relative;background:var(--cream-deep);min-height:360px;}
+.quick-view-media img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
+.quick-view-badge{top:20px;left:20px;}
+
+.quick-view-details{padding:56px 48px;display:flex;flex-direction:column;}
+.quick-view-brand{
+  font-family:'Poppins',sans-serif;font-weight:700;font-size:26px;
+  letter-spacing:.02em;margin-bottom:18px;
+}
+.quick-view-title{
+  font-family:'Poppins',sans-serif;font-weight:500;font-size:22px;
+  line-height:1.35;margin-bottom:14px;
+}
+.quick-view-price{font-size:17px;color:var(--ink-soft);margin-bottom:20px;}
+.quick-view-desc{font-size:14px;line-height:1.75;color:var(--ink-soft);margin-bottom:28px;}
+
+.quick-view-qty{
+  display:inline-flex;align-items:center;gap:18px;
+  border:1px solid var(--line);width:fit-content;
+  padding:10px 18px;margin-bottom:16px;
+}
+.quick-view-qty span{font-size:14px;min-width:14px;text-align:center;}
+
+.quick-view-add-btn{
+  background:var(--ink);color:var(--white);
+  padding:16px 0;width:100%;
+  font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  transition:background .25s;
+}
+.quick-view-add-btn:hover{background:var(--olive-dark);}
+
+.quick-view-links{display:flex;gap:26px;margin-top:20px;}
+.quick-view-link{
+  display:flex;align-items:center;gap:7px;
+  font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);
+}
+.quick-view-link svg{width:16px;height:16px;}
+.quick-view-link:hover{color:var(--ink);}
+.quick-view-link.active{color:var(--olive-dark);}
+.quick-view-link.active svg{fill:var(--olive-dark);}
+
+@media(max-width:768px){
+  .quick-view-modal{grid-template-columns:1fr;max-height:92vh;}
+  .quick-view-media{min-height:280px;}
+  .quick-view-details{padding:36px 28px;}
+}
+
+/* ---------- PRODUCT OVERVIEW PAGE ---------- */
+.product-page{padding-top:110px;}
+
+.product-breadcrumb{
+  font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--gray);
+  padding-bottom:26px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;
+}
+.product-breadcrumb a{color:var(--ink-soft);}
+.product-breadcrumb a:hover{color:var(--ink);text-decoration:underline;}
+.product-breadcrumb span{color:var(--gray);}
+#productBreadcrumbTitle{color:var(--ink-soft);}
+
+.product-main{
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;
+  padding-bottom:70px;
+}
+.product-gallery{
+  position:relative;background:var(--cream-deep);
+  aspect-ratio:3/4;overflow:hidden;
+}
+.product-gallery img{width:100%;height:100%;object-fit:cover;}
+.product-page-badge{top:20px;left:20px;}
+
+/* Thumbnail strip below the main image — only appears when a product
+   has more than one photo (see renderProductThumbnails() in script.js).
+   Left empty for single-image products, so nothing shows and no extra
+   spacing is added. */
+.product-thumbnails{
+  display:flex;gap:12px;margin-top:14px;
+}
+.product-thumbnail{
+  width:72px;height:88px;flex-shrink:0;
+  background:var(--cream-deep);overflow:hidden;
+  border:2px solid transparent;
+  opacity:.7;
+  transition:opacity .2s, border-color .2s;
+}
+.product-thumbnail img{width:100%;height:100%;object-fit:cover;display:block;}
+.product-thumbnail:hover{opacity:1;}
+.product-thumbnail.active{opacity:1;border-color:var(--olive-dark);}
+
+.product-info{padding-top:6px;}
+.product-info-brand{
+  font-family:'Poppins',sans-serif;font-weight:700;font-size:22px;margin-bottom:14px;
+}
+.product-info-title{
+  font-family:'Poppins',sans-serif;font-weight:500;font-size:32px;line-height:1.3;margin-bottom:16px;
+}
+.product-info-rating{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.product-info-rating .stars{color:var(--olive-dark);letter-spacing:2px;}
+.product-info-rating span:last-child{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--gray);}
+.product-info-price{font-size:22px;color:var(--ink);margin-bottom:22px;}
+.product-info-desc{font-size:14px;line-height:1.8;color:var(--ink-soft);margin-bottom:30px;max-width:480px;}
+
+.product-info-actions{display:flex;gap:16px;margin-bottom:20px;max-width:480px;}
+.product-info-actions .quick-view-qty{margin-bottom:0;flex-shrink:0;}
+.product-add-btn{width:auto;flex:1;padding:0 32px;}
+
+.product-info-links{margin-top:0;margin-bottom:34px;}
+
+.product-info-meta{
+  display:flex;flex-direction:column;gap:8px;
+  padding-top:24px;border-top:1px solid var(--line);margin-bottom:8px;
+  font-size:12px;letter-spacing:.03em;color:var(--ink-soft);
+}
+.product-info-meta span:first-child{text-transform:uppercase;color:var(--gray);margin-right:6px;}
+
+.product-accordions{margin-top:18px;}
+.accordion{border-top:1px solid var(--line);}
+.accordion:last-child{border-bottom:1px solid var(--line);}
+.accordion-header{
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+  padding:20px 2px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+}
+.accordion-icon{font-size:16px;color:var(--gray);transition:transform .25s;}
+.accordion.open .accordion-icon{transform:rotate(45deg);} /* turns the + into a × */
+.accordion-body{
+  max-height:0;overflow:hidden;
+  transition:max-height .35s ease, padding .35s ease;
+  padding:0 2px;
+}
+.accordion.open .accordion-body{max-height:600px;padding:0 2px 24px;}
+.accordion-bullets{list-style:none;}
+.accordion-bullets li{
+  position:relative;padding-left:16px;margin-bottom:10px;
+  font-size:13px;color:var(--ink-soft);line-height:1.6;
+}
+.accordion-bullets li::before{
+  content:"";position:absolute;left:0;top:8px;width:5px;height:5px;background:var(--olive-dark);
+}
+.product-story{font-size:13px;line-height:1.8;color:var(--ink-soft);margin-top:16px;}
+.info-row{
+  display:flex;justify-content:space-between;gap:20px;
+  padding:10px 0;font-size:13px;color:var(--ink-soft);border-bottom:1px solid var(--line);
+}
+.info-row span:first-child{color:var(--gray);text-transform:uppercase;letter-spacing:.05em;font-size:11px;}
+.no-reviews{font-size:13px;color:var(--gray);}
+
+.product-related-section{padding:60px 0;border-top:1px solid var(--line);}
+.product-related-section h2{
+  font-family:'Poppins',sans-serif;font-weight:500;font-size:26px;text-align:center;margin-bottom:40px;
+}
+
+@media(max-width:860px){
+  .product-main{grid-template-columns:1fr;gap:36px;}
+  .product-page{padding-top:90px;}
+}
+
+/* ---------- DYNAMIC PAGE CONTENT (About Us / Our Story / Fabric 1 / Fabric 2 / FAQ) ---------- */
+.page-content{
+  min-height:80vh;
+  padding:170px 0 120px;
+}
+.page-content-inner{max-width:1080px;}
+/* About Us gets more breathing room for extra content than the other
+   Pages sub-pages (Our Story, Fabric 1, Fabric 2, FAQ), which stay at
+   the default 760px above. */
+.page-about-us .page-content-inner{max-width:1080px;}
+.page-about-us{padding-top:90px;padding-bottom:0;} /* just clears the fixed header — the hero below supplies its own spacing */
+.page-about-us #pageEyebrow,
+.page-about-us #pageTitle{display:none;} /* the About Us hero below has its own styled title instead */
+.back-home{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--olive);
+  margin-bottom:30px;
+}
+.back-home:hover{text-decoration:underline;}
+.page-content h1{
+  font-family:'Poppins',sans-serif;font-weight:500;font-size:44px;margin:6px 0 28px;
+}
+.page-content #pageBody p{
+  font-size:15px;line-height:1.85;color:var(--ink-soft);margin-bottom:18px;max-width:none;
+}
+
+/* Headings written INSIDE a page's own content (e.g. "Founder Story",
+   "Our Philosophy") — sized a step below the big page title above them
+   so the hierarchy stays clear. */
+.page-content #pageBody h1{
+  font-size:30px;font-weight:500;margin:8px 0 20px;max-width:none;
+}
+.page-content #pageBody h2{
+  font-size:22px;font-weight:600;color:var(--ink);margin:38px 0 16px;max-width:none;
+}
+.page-content #pageBody h3{
+  font-size:16px;font-weight:600;letter-spacing:.03em;color:var(--olive-dark);
+  text-transform:uppercase;margin:28px 0 12px;max-width:none;
+}
+.page-content #pageBody strong{font-weight:600;color:var(--ink);}
+.page-content #pageBody em{font-style:italic;}
+
+.page-content #pageBody ul{
+  margin:0 0 20px;padding-left:22px;max-width:none;
+}
+.page-content #pageBody ul li{
+  font-size:15px;line-height:1.8;color:var(--ink-soft);margin-bottom:8px;
+}
+
+/* A short, italicized list of stand-alone lines (e.g. taglines) —
+   no bullets, each line set apart with a thin gold rule beneath it. */
+.page-content #pageBody .taglines-list{
+  list-style:none;padding:0;margin:24px 0 32px;max-width:none;
+}
+.page-content #pageBody .taglines-list li{
+  font-family:'Poppins',sans-serif;font-style:italic;font-size:18px;
+  color:var(--ink);padding:14px 0;border-bottom:1px solid var(--line);
+}
+.page-content #pageBody .taglines-list li:first-child{border-top:1px solid var(--line);}
+
+.page-content #pageBody blockquote{
+  font-family:'Poppins',sans-serif;font-style:italic;font-size:19px;line-height:1.6;
+  color:var(--ink);border-left:3px solid var(--olive-dark);
+  padding:4px 0 4px 22px;margin:24px 0;max-width:600px;
+}
+
+/* A centered, standalone banner for a single stand-out line — used both
+   as a <blockquote class="tagline-banner"> and a plain <div>. */
+.page-content #pageBody .tagline-banner{
+  font-family:'Poppins',sans-serif;font-style:italic;font-size:22px;line-height:1.5;
+  color:var(--ink);text-align:center;
+  background:var(--cream-deep);border-left:none;
+  padding:30px 24px;margin:32px 0;max-width:none;
+}
+.page-content #pageBody .tagline-banner small{
+  display:block;font-style:normal;font-size:12px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--olive-dark);margin-top:10px;
+}
+
+/* FAQ-style question/answer blocks */
+.page-content #pageBody .faq-item{
+  max-width:640px;padding:20px 0;border-bottom:1px solid var(--line);
+}
+.page-content #pageBody .faq-item:first-of-type{border-top:1px solid var(--line);}
+.page-content #pageBody .faq-question{
+  font-weight:600;color:var(--ink);font-size:15px;margin-bottom:8px;
+}
+.page-content #pageBody .faq-answer{
+  font-size:14px;line-height:1.8;color:var(--ink-soft);
+}
+
+/* ---------- ABOUT US: hero split section + founder letter ---------- */
+/* This page intentionally uses its own warm terracotta palette (matching
+   the reference design it was built from) instead of the site's usual
+   gold accent — colors are hard-coded here rather than reusing the
+   --olive variable for that reason. Font stays Poppins/italic to match
+   the rest of the site's single-typeface rule, styled to echo the
+   elegant serif look of the reference without introducing a second font. */
+.about-hero{
+  /* full-bleed: breaks out of the page's centered max-width container so
+     the background/photo can run edge-to-edge under the fixed header */
+  position:relative;width:100vw;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;
+  display:grid;grid-template-columns:0.75fr 1.25fr;align-items:stretch;
+  background:#CC9670;
+  min-height:620px;
+}
+.about-hero-text{
+  padding:110px 6% 90px 10%;
+  color:#FBF0E4;
+  display:flex;flex-direction:column;justify-content:center;
+}
+#pageBody .about-hero-title{
+  font-family:'Poppins',sans-serif;font-style:italic;font-weight:300;
+  font-size:clamp(40px,5vw,64px);color:#FBF0E4;margin-bottom:28px;
+}
+#pageBody .about-hero-text p{
+  font-size:15px;line-height:1.85;color:rgba(255,255,255,.92);
+  max-width:480px;margin-bottom:18px;
+}
+.about-hero-media{position:relative;min-height:340px;}
+.about-hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+
+.about-founder{
+  max-width:760px;margin:0 auto;padding:100px 40px 120px;
+}
+#pageBody .about-founder-title{
+  font-family:'Poppins',sans-serif;font-style:italic;font-weight:300;
+  font-size:clamp(30px,4vw,42px);color:#C98860;margin-bottom:32px;
+}
+#pageBody .about-founder p{
+  font-size:15px;line-height:1.85;color:var(--ink-soft);margin-bottom:18px;
+}
+#pageBody .about-founder-signature{
+  font-family:'Poppins',sans-serif;font-style:italic;font-size:20px;
+  color:#C98860;margin-top:24px;margin-bottom:2px !important;
+}
+#pageBody .about-founder-role{
+  font-size:13px;font-style:italic;color:var(--gray);margin-bottom:0 !important;
+}
+
+@media(max-width:860px){
+  .about-hero{grid-template-columns:1fr;}
+  .about-hero-text{padding:70px 8% 50px;}
+  .about-hero-media{min-height:320px;}
+}
+
+/* ---------- SCROLL-REVEAL ANIMATION ---------- */
+/* Used on the About Us page: elements marked [data-reveal] start
+   hidden/offset, then fade and slide into place once scrolled into
+   view — see script.js, search "Scroll-reveal" for the logic that
+   adds/removes the "in-view" class. This is reusable for other pages
+   too — just add data-reveal to any element you want to animate in. */
+.reveal{
+  opacity:0;transform:translateY(28px);
+  transition:opacity .7s ease, transform .7s ease;
+}
+.reveal[data-reveal-from="right"]{transform:translateX(48px);}
+.reveal[data-reveal-from="left"]{transform:translateX(-48px);}
+.reveal.in-view{opacity:1;transform:translate(0,0);}
+
+/* Staggers each paragraph's reveal slightly so they cascade in one
+   after another, rather than all appearing at once — this is what
+   gives the About Us text its "one after the other" motion. */
+.about-hero-text .reveal:nth-child(1){transition-delay:0s;}
+.about-hero-text .reveal:nth-child(2){transition-delay:.12s;}
+.about-hero-text .reveal:nth-child(3){transition-delay:.24s;}
+.about-hero-text .reveal:nth-child(4){transition-delay:.36s;}
+.about-founder .reveal:nth-child(1){transition-delay:0s;}
+.about-founder .reveal:nth-child(2){transition-delay:.1s;}
+.about-founder .reveal:nth-child(3){transition-delay:.2s;}
+.about-founder .reveal:nth-child(4){transition-delay:.3s;}
+.about-founder .reveal:nth-child(5){transition-delay:.4s;}
+.about-founder .reveal:nth-child(6){transition-delay:.5s;}
+.about-founder .reveal:nth-child(7){transition-delay:.58s;}
+
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none;}
+}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;
+  /* Matches the hero photos' own 1350:700 aspect ratio, so object-fit:cover
+     below never actually needs to crop them — the whole photo is always
+     visible, just scaled up or down. This is what makes each slide's
+     button position accurate at every screen width: previously, height
+     was fixed to 100vh independent of width, so the visible crop of each
+     photo (and therefore where its own baked-in text landed) shifted
+     depending on the browser window's exact width-to-height ratio, which
+     is why the button drifted out of alignment at some sizes but not
+     others. If you use photos with a different aspect ratio later, this
+     value should be updated to match them. */
+  aspect-ratio:1350/700;
+  min-height:460px;
+  overflow:hidden;
+}
+.hero img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+}
+.hero-slide::after{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg, rgba(20,18,14,.28) 0%, rgba(20,18,14,.12) 35%, rgba(20,18,14,.4) 100%);
+}
+
+/* ---------- HERO CAROUSEL ---------- */
+.hero-slides{position:absolute;inset:0;}
+.hero-slide{
+  position:absolute;inset:0;
+  opacity:0;
+  pointer-events:none; /* stops the button on a hidden slide from being clickable or blocking clicks */
+  transition:opacity 1s ease;
+}
+.hero-slide.active{opacity:1;z-index:1;pointer-events:auto;}
+
+.hero-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:3;
+  width:44px;height:44px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.5);
+  color:var(--white);
+  opacity:0;transition:opacity .25s, background .25s;
+}
+.hero:hover .hero-arrow{opacity:1;}
+.hero-arrow:hover{background:rgba(255,255,255,.28);}
+.hero-arrow svg{width:18px;height:18px;}
+.hero-arrow-prev{left:24px;}
+.hero-arrow-next{right:24px;}
+
+.hero-dots{
+  position:absolute;bottom:78px;left:50%;transform:translateX(-50%);z-index:3;
+  display:flex;gap:10px;
+}
+.hero-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(255,255,255,.45);
+  border:1px solid rgba(255,255,255,.7);
+  transition:background .25s, transform .25s;
+}
+.hero-dot:hover{background:rgba(255,255,255,.75);}
+.hero-dot.active{background:var(--white);transform:scale(1.3);}
+
+.hero-content{
+  position:absolute;z-index:2;color:var(--white);
+  text-align:left;
+}
+.hero-tagline{
+  font-family:'Casanova Serif',sans-serif;font-style:bold;font-weight:300;
+  font-size:clamp(22px,3vw,34px);line-height:1.25;
+  margin-bottom:16px;max-width:420px;
+  text-shadow:0 2px 14px rgba(0,0,0,.35); /* keeps it legible over busy/light parts of a photo */
+}
+/* Slide 1's photo has a light gray/white background rather than a dark
+   one, so the default white tagline color (set above) would barely be
+   visible there — this overrides just that one slide's tagline to a
+   yellow that reads clearly against it. Slides 2 and 3 are untouched
+   and keep the default white — edit the color value below, or delete
+   this whole rule to go back to white on slide 1 too. */
+.hero-content-1 .hero-tagline{color:#9f8218;}
+
+/* The tagline and button animate in separately (tagline first, button
+   just after) rather than as one block, so they read as a little
+   cascade rather than popping in all at once. Runs every time a slide's
+   .active class is (re)applied — see goToHeroSlide() in script.js,
+   which toggles this class on every slide change (including cycling
+   back to a slide that was active before), so this naturally replays
+   each time that slide comes back around. */
+.hero-tagline, .hero-content .hero-cta{
+  opacity:0; /* animated in below, once a slide becomes .active */
+}
+@keyframes heroContentIn{
+  from{opacity:0;transform:translateY(22px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.hero-slide.active .hero-tagline{
+  animation:heroContentIn .8s cubic-bezier(.22,.61,.36,1) .15s forwards;
+}
+.hero-slide.active .hero-content .hero-cta{
+  animation:heroContentIn .8s cubic-bezier(.22,.61,.36,1) .4s forwards;
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-tagline, .hero-content .hero-cta{opacity:1;}
+  .hero-slide.active .hero-tagline, .hero-slide.active .hero-content .hero-cta{animation:none;}
+}
+/* Each slide's photo has its own composition, so the button's position is
+   set per-slide here (matching where the reference designs placed their
+   own button on each photo) rather than one fixed spot for all 3. If you
+   swap in a different photo for a slide later, these percentages will
+   likely need adjusting to match the new photo's composition — search
+   for "hero-content-1/2/3" to find these. */
+.hero-content-1{left:25%;bottom:30%;}
+.hero-content-2{left:61%;bottom:45%;}
+.hero-content-3{left:17%;bottom:32%;}
+.hero-cta{
+  display:inline-block;
+  padding:15px 42px;
+  border:1px solid rgba(255,255,255,.85);
+  font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  background:rgba(255,255,255,.06);
+  transition:background .3s, color .3s;
+}
+.hero-cta:hover{background:var(--white);color:var(--ink);}
+/* Smaller than the site's default .hero-cta size, just for the hero
+   banner slides — scoped here (rather than shrinking the base rule
+   above) so the cart drawer's checkout button, which reuses the same
+   .hero-cta class, isn't affected. */
+.hero-content .hero-cta{padding:10px 26px;font-size:10.5px;letter-spacing:.14em;}
+.hero-tag{
+  position:absolute;right:0;top:52%;z-index:3;
+  transform:translateY(-50%) rotate(90deg);transform-origin:right center;
+  background:var(--olive);color:var(--white);
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  padding:9px 22px;
+}
+/* ---------- CATEGORY SPLIT SECTIONS ---------- */
+.split{
+  display:grid;grid-template-columns:1fr 1fr;align-items:stretch;
+}
+.split-media{position:relative;min-height:560px;background:var(--cream-deep);overflow:hidden;}
+.split-media img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
+.split-media .frame{
+  position:absolute;inset:36px;border:1px solid rgba(255,255,255,.5);pointer-events:none;
+}
+.split-info{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:60px 64px;
+}
+.split-info h2{
+  font-family:'Poppins',sans-serif;font-style:italic;font-weight:400;
+  font-size:52px;margin-bottom:44px;
+  position:relative;display:inline-block;
+}
+.split-info h2::after{
+  content:"";position:absolute;left:2px;bottom:-16px;
+  width:64px;height:3px;background:var(--olive-dark);
+}
+.cat-columns{display:flex;gap:60px;}
+.cat-columns ul{list-style:none;}
+.cat-columns li{
+  font-size:13px;letter-spacing:.06em;text-transform:uppercase;
+  padding:9px 0;color:var(--ink-soft);
+  border-bottom:1px solid transparent;
+  transition:color .2s, border-color .2s;
+  cursor:pointer;
+}
+.cat-columns li:hover{color:var(--ink);border-color:var(--line);}
+.men-row .split-info{order:1;}
+.men-row .split-media{order:2;}
+@media(min-width:0){.men-row{grid-template-columns:1fr 1fr;}}
+
+/* ---------- FEATURED PRODUCTS ---------- */
+.featured{padding:50px 0 0px;text-align:center;}
+.featured .eyebrow{margin-bottom:10px;}
+.featured h2{
+  font-family:'Poppins',sans-serif;font-weight:500;font-size:38px;margin-bottom:20px;
+  position:relative;display:inline-block;padding-bottom:18px;
+}
+.featured h2::after{
+  content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+  width:56px;height:3px;background:var(--olive-dark);
+}
+.featured .tabs{margin-top:16px;}
+.tabs{display:flex;justify-content:center;gap:36px;margin-bottom:56px;}
+.tab{
+  font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);
+  padding-bottom:8px;border-bottom:1px solid transparent;transition:.25s;
+}
+.tab.active{color:var(--ink);border-color:var(--ink);}
+.tab:hover{color:var(--ink);}
+.product-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:34px;
+  max-width:var(--maxw);margin:0 auto;padding:0 40px;
+  text-align:left;
+}
+.product-card{position:relative;}
+.product-img{position:relative;overflow:hidden;background:var(--cream-deep);aspect-ratio:3/4;}
+.product-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
+.product-card:hover .product-img img{transform:scale(1.06);}
+.badge{
+  position:absolute;top:14px;left:14px;z-index:2;
+  display:flex;gap:6px;
+}
+.badge[hidden]{display:none;}
+.badge span{
+  font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 10px;background:var(--ink);color:var(--white);
+}
+.badge .sale{background:var(--olive);}
+
+.wishlist-icon-btn{
+  position:absolute;top:12px;right:12px;z-index:2;
+  width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.85);color:var(--ink-soft);
+  opacity:0;transform:translateY(-6px);
+  transition:opacity .25s, transform .25s, background .2s, color .2s;
+}
+.product-card:hover .wishlist-icon-btn{opacity:1;transform:translateY(0);}
+.wishlist-icon-btn svg{width:17px;height:17px;}
+.wishlist-icon-btn:hover{background:var(--white);color:var(--ink);}
+.wishlist-icon-btn.active{opacity:1;transform:translateY(0);color:var(--olive-dark);}
+.wishlist-icon-btn.active svg{fill:var(--olive-dark);}
+
+.quick-add{
+  display:flex;align-items:center;justify-content:center;width:100%;
+  position:absolute;left:14px;right:14px;bottom:14px;z-index:2;
+  background:var(--white);color:var(--ink);
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  text-align:center;padding:12px 0;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .3s, transform .3s, background .25s, color .25s;
+}
+.product-card:hover .quick-add{opacity:1;transform:translateY(0);}
+.quick-add:hover{background:var(--ink);color:var(--white);}
+
+/* Two-button action bar (Quick View + Add to Cart) used on the homepage's
+   Featured Products. This sits in the same spot .quick-add does on other
+   product grids (e.g. the Shop page), it's just split into two buttons
+   instead of one. */
+.card-actions{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;
+  display:flex;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .3s, transform .3s;
+}
+.product-card:hover .card-actions{opacity:1;transform:translateY(0);}
+.card-action-btn{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:7px;
+  padding:13px 0;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  transition:opacity .2s;
+}
+.card-action-btn svg{width:15px;height:15px;flex-shrink:0;}
+.quick-view-btn{background:var(--olive-dark);color:var(--white);}
+.add-to-cart-btn{background:var(--white);color:var(--ink);}
+.card-action-btn:hover{opacity:.85;}
+
+.product-meta{padding:18px 2px 0;}
+.product-name{font-size:14px;font-weight:500;}
+.product-desc{font-size:12px;color:var(--gray);margin:3px 0 8px;}
+.product-price{font-size:13px;letter-spacing:.03em;}
+
+/* ---------- BRANDS (right-to-left marquee) ---------- */
+.brands{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:44px 0;margin-top:110px;
+}
+.marquee{
+  overflow:hidden;               /* hides the part of the track outside the viewport */
+  width:100%;
+  -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+  mask-image:linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+}
+.marquee-track{
+  display:flex;
+  align-items:center;
+  gap:80px;
+  width:max-content;             /* let the track be as wide as its content (2x the brand list) */
+  animation:marquee-scroll 26s linear infinite;
+}
+.marquee:hover .marquee-track{
+  animation-play-state:paused;   /* pause the scroll while a visitor is looking at it */
+}
+@keyframes marquee-scroll{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-50%); } /* -50% because the list is duplicated once */
+}
+.brand-name{
+  font-family:'Poppins',sans-serif;font-size:20px;letter-spacing:.06em;color:var(--ink-soft);
+  opacity:.65;transition:opacity .25s;white-space:nowrap;
+}
+.brand-name span{display:block;font-family:'Poppins',sans-serif;font-size:8px;letter-spacing:.2em;color:var(--gray);}
+.brand-name:hover{opacity:1;}
+
+/* ---------- FEATURES ROW ---------- */
+.features{padding:54px 0;}
+.features .wrap{
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:28px;
+}
+.feature{display:flex;align-items:center;gap:12px;flex:1;min-width:190px;}
+.feature svg{width:26px;height:26px;color:var(--olive);flex-shrink:0;stroke-width:1.3;}
+.feature p{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);}
+
+/* ---------- PROMO BLOCKS ---------- */
+.promo-row{display:grid;grid-template-columns:1fr 1fr 1fr;}
+.promo{
+  position:relative;min-height:460px;overflow:hidden;
+  display:flex;align-items:flex-end;
+}
+.promo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s ease;}
+.promo:hover img{transform:scale(1.05);}
+.promo::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg, rgba(15,14,11,.55) 0%, rgba(15,14,11,0) 55%);}
+.promo.solid{background:var(--ink);display:flex;align-items:center;justify-content:center;}
+.promo-tag{
+  position:absolute;top:20px;left:20px;z-index:2;
+  font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--white);
+  border:1px solid rgba(255,255,255,.6);padding:5px 11px;
+}
+.promo-content{position:relative;z-index:2;padding:34px;color:var(--white);}
+.promo-content h3{font-family:'Poppins',sans-serif;font-weight:500;font-size:26px;line-height:1.25;max-width:220px;margin-bottom:16px;}
+.promo-content .hero-cta{margin-top:0;padding:12px 26px;font-size:11px;}
+
+/* ---------- PHILOSOPHY ---------- */
+.philosophy{
+  position:relative;
+  padding:90px 0 100px;text-align:center;overflow:hidden;
+}
+.philosophy p{
+  font-family:'Poppins',sans-serif;font-style:italic;font-weight:400;
+  font-size:clamp(22px,3vw,32px);line-height:1.55;
+  max-width: 1080px;margin:0 auto;color:var(--ink-soft);
+  position:relative;z-index:2;
+}
+.philosophy svg.bloom{
+  position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);
+  width: 720px;height:auto;opacity:.35;z-index:1;color:var(--olive);
+}
+.image-container {
+  width:100%;max-width:900px;height:420px;margin:0 auto;
+  overflow:hidden; /* Ensures nothing spills out */
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* The magic property */
+  object-position: center; /* Centers the image */
+}
+
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--ink);color:#D9D4C8;padding-top:80px;}
+.footer-top{
+  display:grid;grid-template-columns:1.4fr 1fr 1fr 1.3fr;gap:40px;
+  padding-bottom:60px;border-bottom:1px solid rgba(255,255,255,.12);
+}
+.footer-top h4{
+  font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--white);margin-bottom:20px;
+}
+.newsletter p{font-size:13px;line-height:1.7;color:#AFA99B;margin-bottom:22px;max-width:320px;}
+.signup{display:flex;border-bottom:1px solid rgba(255,255,255,.3);max-width:320px;}
+.signup input{
+  flex:1;background:none;border:none;padding:10px 0;color:var(--white);font-size:13px;
+}
+.signup input::placeholder{color:#8A8578;}
+.signup button{
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--olive);
+  white-space:nowrap;padding:10px 4px;
+}
+.footer-links ul{list-style:none;}
+.footer-links li{margin-bottom:11px;}
+.footer-links a{font-size:13px;color:#AFA99B;transition:color .2s;}
+.footer-links a:hover{color:var(--white);}
+.contact p{font-size:13px;line-height:1.7;color:#AFA99B;margin-bottom:16px;}
+.contact strong{color:var(--white);display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px;}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;
+  padding:26px 0;
+}
+.payments{display:flex;gap:10px;}
+.payments span{
+  font-size:9px;letter-spacing:.05em;border:1px solid rgba(255,255,255,.25);
+  padding:5px 9px;color:#AFA99B;
+}
+.socials{display:flex;gap:14px;}
+.socials a{
+  width:32px;height:32px;border:1px solid rgba(255,255,255,.25);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;transition:.25s;
+}
+.socials a:hover{background:var(--white);}
+.socials a:hover svg{color:var(--ink);}
+.socials svg{width:14px;height:14px;color:var(--white);}
+.footer-note{font-size:11px;color:#7A7568;text-align:center;padding:20px 0;border-top:1px solid rgba(255,255,255,.08);}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:980px){
+  .navlinks{display:none;}
+  .burger{display:block;}
+  .split, .men-row{grid-template-columns:1fr;}
+  .men-row .split-info{order:2;}
+  .men-row .split-media{order:1;}
+  .split-media{min-height:380px;}
+  .split-info{padding:48px 32px;}
+  .product-grid{grid-template-columns:repeat(2,1fr);gap:24px;padding:0 32px;}
+  .promo-row{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr 1fr;}
+  .wrap{padding:0 28px;}
+  .quick-add{opacity:1;transform:translateY(0);}
+  .card-actions{opacity:1;transform:translateY(0);}
+  .wishlist-icon-btn{opacity:1;transform:translateY(0);}
+  .hero-arrow{opacity:1;width:38px;height:38px;}
+  .hero-arrow-prev{left:14px;}
+  .hero-arrow-next{right:14px;}
+}
+
+/* Below full desktop width, the hero photo gets cropped differently by
+   object-fit:cover depending on the viewport's exact aspect ratio,
+   which shifts where each photo's own baked-in text appears on screen.
+   Percentage positions tuned to match that text at desktop width drift
+   out of alignment at these in-between sizes — so rather than chase
+   increasingly specific breakpoints per photo, the button switches to a
+   simple, reliably-centered position through this whole range instead
+   (kept separate from the 980px breakpoint above, which handles
+   unrelated layout changes, so this can cover a wider/different range
+   — including the common 1024px tablet width — without affecting those). */
+@media(max-width:1100px){
+  .hero{aspect-ratio:unset;height:85vh;min-height:520px;}
+  .hero-content-1, .hero-content-2, .hero-content-3{
+    left:24px;right:24px;bottom:64px;text-align:center;
+  }
+}
+
+@media(max-width:560px){
+  .nav{padding:14px 24px;}
+  .icons{gap:14px;}
+  .cat-columns{gap:34px;}
+  .split-info h2{font-size:40px;}
+  .product-grid{grid-template-columns:1fr;padding:0 24px;}
+  .footer-top{grid-template-columns:1fr;padding:0 24px 40px;}
+  .footer-top{padding-left:24px;padding-right:24px;}
+  footer{padding-top:56px;}
+  .footer-bottom{padding:26px 24px;justify-content:center;text-align:center;}
+  .brands .wrap{justify-content:center;gap:26px 40px;}
+  .promo-content h3{max-width:none;}
+  .hero-content-1, .hero-content-2, .hero-content-3{
+    left:24px;right:24px;bottom:90px;text-align:center;
+  }
+}
