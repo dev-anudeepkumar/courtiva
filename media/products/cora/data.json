@@ -1,0 +1,21 @@
+{
+  "name": "Cora",
+  "brand": "Courtiva",
+  "price": 65.0,
+  "compareAtPrice": null,
+  "category": "sportswear",
+  "description": "Cora pairs intricate forest-green lace with a contrasting ivory base for a feminine take on performance wear. A sleek silhouette and subtle side slit allow effortless movement, while FIR-infused fabric brings Courtiva’s recovery technology to every game.",
+  "tagline": "Nature, in motion.",
+  "image": "image.jpg",
+  "badgeSale": null,
+  "badgeFeatured": true,
+  "badgeBestseller": false,
+  "badgeOutOfStock": false,
+  "rating": false,
+  "images": [
+    "image.png",
+    "image-2.png",
+    "image-3.png",
+    "image-4.png"
+  ]
+}
