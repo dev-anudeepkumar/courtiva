@@ -1,0 +1,18 @@
+{
+  "name": "Arden",
+  "brand": "Courtiva",
+  "price": 180.0,
+  "compareAtPrice": null,
+  "category": "accessories",
+  "description": "A refined tennis duffle with generous storage, dedicated racket space and considered detailing. Designed to move effortlessly from match day to the rest of your day.",
+  "tagline": "Made for the court. Styled beyond it.",
+  "image": "image.jpg",
+  "badgeSale": null,
+  "badgeFeatured": false,
+  "badgeBestseller": true,
+  "badgeOutOfStock": false,
+  "rating": false,
+  "images": [
+    "image.png"
+  ]
+}
