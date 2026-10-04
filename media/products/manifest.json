@@ -1,0 +1,22 @@
+{
+  "_comment": "This is the master list for the whole product catalog. To ADD a product: create a new folder in media/products/ with an image + data.json (copy an existing folder as a template), then add its folder name to the right list below. To REMOVE a product: delete its folder name from the list below (the folder itself can stay or be deleted). To REORDER: change the order of names in the list. Folder names here must exactly match the folder names inside media/products/.",
+
+  "shop": [
+    "aurelia-sportswear",
+    "sena-sportswear",
+    "zelie",
+    "viora-sportswear",
+    "cleo",
+    "cora",
+    "roselle",
+    "arden",
+    "alba"
+  ],
+
+  "featured": [
+    "aurelia-dress",
+    "sena-pullover",
+    "alba",
+    "viora-sweatshirt"
+  ]
+}
