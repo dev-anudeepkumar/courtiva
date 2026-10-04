@@ -1,0 +1,21 @@
+{
+  "name": "Aurelia",
+  "brand": "Courtiva",
+  "price": 140.0,
+  "compareAtPrice": null,
+  "category": "sportswear",
+  "description": "A sculpted zip-front silhouette, sheer mesh detailing and a beautifully pleated skirt, crafted in FIR-infused performance fabric for comfort and recovery on and off the court.",
+  "tagline": "The new tennis white.",
+  "image": "image.jpg",
+  "badgeSale": null,
+  "badgeFeatured": true,
+  "badgeBestseller": false,
+  "badgeOutOfStock": false,
+  "rating": false,
+  "images": [
+    "image.png",
+    "image-2.png",
+    "image-3.png",
+    "image-4.png"
+  ]
+}
