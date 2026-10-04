@@ -1,0 +1,21 @@
+{
+  "name": "Viora",
+  "brand": "Courtiva",
+  "price": 320.0,
+  "compareAtPrice": null,
+  "category": "sportswear",
+  "description": "Viora plays with contrast — a sleek, sculpted silhouette meets sheer mesh accents and cascading tiers that move beautifully with every step. The warm ivory and mocha palette brings an understated elegance to the court, while FIR-infused performance fabric supports comfort and recovery through every game and beyond.",
+  "tagline": "Soft structure. Bold movement.",
+  "image": "image.jpg",
+  "badgeSale": null,
+  "badgeFeatured": false,
+  "badgeBestseller": false,
+  "badgeOutOfStock": false,
+  "rating": false,
+  "images": [
+    "image.png",
+    "image-2.png",
+    "image-3.png",
+    "image-4.png"
+  ]
+}
