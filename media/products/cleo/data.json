@@ -1,0 +1,21 @@
+{
+  "name": "Cleo",
+  "brand": "Courtiva",
+  "price": 850.0,
+  "compareAtPrice": null,
+  "category": "sportswear",
+  "description": "Sleek from the front, unexpected from behind. Cleo combines a clean black silhouette with sheer black mesh, revealing a subtle leopard print beneath at the back. A hint of leopard peeks through the hem as you move. Crafted with FIR-infused fabric for performance, comfort and recovery.",
+  "tagline": "Understated. Until you move!",
+  "image": "image.jpg",
+  "badgeSale": "-6%",
+  "badgeFeatured": true,
+  "badgeBestseller": false,
+  "badgeOutOfStock": false,
+  "rating": false,
+  "images": [
+    "image.png",
+    "image-2.png",
+    "image-3.png",
+    "image-4.png"
+  ]
+}
