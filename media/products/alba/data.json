@@ -1,0 +1,20 @@
+{
+  "name": "Alba",
+  "brand": "Courtiva",
+  "price": 80.0,
+  "compareAtPrice": null,
+  "category": "accessories",
+  "description": "A refined tennis tote with a detachable racket compartment, spacious interior and signature Courtiva detailing. Designed to carry everything you need—from court to wherever the day takes you.",
+  "tagline": "Court-ready. Life-ready.",
+  "image": "image.jpg",
+  "badgeSale": null,
+  "badgeFeatured": true,
+  "badgeBestseller": false,
+  "badgeOutOfStock": false,
+  "rating": false,
+  "images": [
+	"1A.png",
+	"1B.png",
+	"1C.png"
+  ]
+}
