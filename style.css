@@ -1387,16 +1387,45 @@ header.scrolled .burger svg{color:var(--ink);}
   position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);
   width: 720px;height:auto;opacity:.35;z-index:1;color:var(--olive);
 }
-.image-container {
-  width:100%;max-width:900px;height:420px;margin:0 auto;
-  overflow:hidden; /* Ensures nothing spills out */
+
+/* Philosophy banner — converted from a flat placeholder image into real
+   text + icons. Uses Courtiva's own theme (Poppins, --olive/--olive-dark)
+   rather than the Cormorant Garamond font and hardcoded ochre/bronze hex
+   colors from the component it was adapted from, so it stays visually
+   consistent with the rest of the site. */
+.philosophy-banner{
+  width:100%;max-width:1050px;margin:0 auto;
+  background:var(--olive-dark);
+  padding:70px 40px 60px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+}
+.philosophy-text{
+  max-width:760px;
+  font-family:'Poppins',sans-serif;font-style:italic;font-weight:400;
+  font-size:clamp(19px,2.4vw,26px);line-height:1.6;letter-spacing:.01em;
+  color:var(--cream-deep);
+  margin-bottom:50px;
+}
+.philosophy-icons{
+  display:flex;justify-content:center;align-items:center;gap:75px;
+}
+.icon-wrapper{
+  width:48px;height:48px;display:inline-flex;align-items:center;justify-content:center;
+  opacity:.75;transition:transform .25s ease, opacity .25s ease;
+}
+.icon-wrapper:hover{opacity:1;transform:translateY(-2px);}
+.icon-wrapper svg{
+  width:100%;height:100%;
+  stroke:var(--cream-deep);fill:none;stroke-width:1.75;
+  stroke-linecap:round;stroke-linejoin:round;
 }
 
-.image-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* The magic property */
-  object-position: center; /* Centers the image */
+@media(max-width:768px){
+  .philosophy-banner{padding:50px 24px 45px;}
+  .philosophy-text{font-size:20px;line-height:1.45;margin-bottom:40px;}
+  .philosophy-icons{gap:40px;}
+  .icon-wrapper{width:40px;height:40px;}
 }
 
 
