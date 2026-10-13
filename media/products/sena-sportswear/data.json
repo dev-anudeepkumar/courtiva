@@ -1,0 +1,20 @@
+{
+  "name": "Sena",
+  "brand": "Courtiva",
+  "price": 150.0,
+  "compareAtPrice": null,
+  "category": "sportswear",
+  "description": "Designed to move, stretch and reset with you. Sena pairs a streamlined tank with flattering flared trousers, finished with contrast piping for a sleek, elongated silhouette. Crafted with FIR-infused fabric, it brings recovery technology into an effortlessly polished look — from warm-up and stretch to everything after.",
+  "tagline": "Move. Recover. Carry on.",
+  "image": "image.jpg",
+  "badgeSale": null,
+  "badgeFeatured": true,
+  "badgeBestseller": false,
+  "badgeOutOfStock": false,
+  "rating": false,
+  "images": [
+    "2A.png",
+    "2B.png",
+    "2C.png"
+  ]
+}
