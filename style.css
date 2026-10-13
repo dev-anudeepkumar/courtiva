@@ -1087,7 +1087,7 @@ header.scrolled .burger svg{color:var(--ink);}
    swap in a different photo for a slide later, these percentages will
    likely need adjusting to match the new photo's composition — search
    for "hero-content-1/2/3" to find these. */
-.hero-content-1{left:25%;bottom:30%;}
+.hero-content-1{left:60%;bottom:60%;}
 .hero-content-2{left:61%;bottom:45%;}
 .hero-content-3{left:17%;bottom:32%;}
 .hero-cta{
