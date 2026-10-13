@@ -1,0 +1,21 @@
+{
+  "name": "Roselle",
+  "brand": "Courtiva",
+  "price": 35.0,
+  "compareAtPrice": null,
+  "category": "sportswear",
+  "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.",
+  "tagline": "Feels like rose is moving",
+  "image": "image.jpg",
+  "badgeSale": null,
+  "badgeFeatured": false,
+  "badgeBestseller": false,
+  "badgeOutOfStock": false,
+  "rating": false,
+  "images": [
+    "7A.png",
+    "7B.png",
+    "7C.png",
+    "7D.png"
+  ]
+}
