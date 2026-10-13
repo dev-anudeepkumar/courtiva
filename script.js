@@ -1401,7 +1401,7 @@ function renderShopCardHTML(id, data) {
     : '<button type="button" class="quick-add" data-add-to-cart>Add to Cart</button>';
 
   return `
-    <article class="product-card" data-name="${escapeAttr(data.name)}" data-price="${data.price.toFixed(2)}" data-category="${escapeAttr(data.category)}" data-product-id="${escapeAttr(id)}">
+    <article class="product-card" data-name="${escapeAttr(data.name)}" data-price="${data.price.toFixed(2)}" data-category="${escapeAttr(data.category)}" data-product-id="${escapeAttr(id)}" data-desc="${escapeAttr(data.description)}">
       <div class="product-img">
         <button type="button" class="wishlist-icon-btn" data-wishlist-toggle aria-label="Add to Wishlist">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.8-9.8-9.2C.7 7.4 2.3 4 5.8 4c2 0 3.4 1.1 4.2 2.4C10.8 5.1 12.2 4 14.2 4c3.5 0 5.1 3.4 3.6 6.8C15.5 15.2 12 20 12 20z"/></svg>
@@ -1413,7 +1413,7 @@ function renderShopCardHTML(id, data) {
       <div class="product-meta">
         <div class="product-brand">${escapeHtml(data.brand)}</div>
         <div class="product-name">${escapeHtml(data.name)}</div>
-        <p class="product-desc">${escapeHtml(data.description)}</p>
+        <p class="product-desc">${escapeHtml(data.tagline)}</p>
         <div class="product-price">${priceHTML}</div>
       </div>
     </article>

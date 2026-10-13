@@ -1,3 +1,114 @@
+/* ---------- FONTS (self-hosted, no external Google Fonts request) ---------- */
+/* Kugile — used specifically for the hero banner tagline text (see
+   .hero-tagline further down). This came from a file named
+   "Kugile_Demo.ttf" and its own internal metadata is marked
+   "All rights reserved" by its foundry (Pentagoni Studio) — demo fonts
+   like this are very often licensed for preview/personal use only, not
+   for use on a live commercial site. Worth confirming you have a proper
+   commercial license before this goes live for real. */
+@font-face{
+  font-family:'Kugile';
+  src:url('media/fonts/Kugile_Demo.ttf') format('truetype');
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+
+/* Poppins — the full family, every weight from Thin(100) to Black(900),
+   normal and italic. Replaces the previous Google Fonts CDN link, so
+   the site no longer depends on an external network request for its
+   main typeface. */
+@font-face{
+  font-family:'Poppins';
+  src:url('media/fonts/Poppins-Thin.ttf') format('truetype');
+  font-weight:100;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Poppins';
+  src:url('media/fonts/Poppins-ThinItalic.ttf') format('truetype');
+  font-weight:100;font-style:italic;font-display:swap;
+}
+@font-face{
+  font-family:'Poppins';
+  src:url('media/fonts/Poppins-ExtraLight.ttf') format('truetype');
+  font-weight:200;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Poppins';
+  src:url('media/fonts/Poppins-ExtraLightItalic.ttf') format('truetype');
+  font-weight:200;font-style:italic;font-display:swap;
+}
+@font-face{
+  font-family:'Poppins';
+  src:url('media/fonts/Poppins-Light.ttf') format('truetype');
+  font-weight:300;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Poppins';
+  src:url('media/fonts/Poppins-LightItalic.ttf') format('truetype');
+  font-weight:300;font-style:italic;font-display:swap;
+}
+@font-face{
+  font-family:'Poppins';
+  src:url('media/fonts/Poppins-Regular.ttf') format('truetype');
+  font-weight:400;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Poppins';
+  src:url('media/fonts/Poppins-Italic.ttf') format('truetype');
+  font-weight:400;font-style:italic;font-display:swap;
+}
+@font-face{
+  font-family:'Poppins';
+  src:url('media/fonts/Poppins-Medium.ttf') format('truetype');
+  font-weight:500;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Poppins';
+  src:url('media/fonts/Poppins-MediumItalic.ttf') format('truetype');
+  font-weight:500;font-style:italic;font-display:swap;
+}
+@font-face{
+  font-family:'Poppins';
+  src:url('media/fonts/Poppins-SemiBold.ttf') format('truetype');
+  font-weight:600;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Poppins';
+  src:url('media/fonts/Poppins-SemiBoldItalic.ttf') format('truetype');
+  font-weight:600;font-style:italic;font-display:swap;
+}
+@font-face{
+  font-family:'Poppins';
+  src:url('media/fonts/Poppins-Bold.ttf') format('truetype');
+  font-weight:700;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Poppins';
+  src:url('media/fonts/Poppins-BoldItalic.ttf') format('truetype');
+  font-weight:700;font-style:italic;font-display:swap;
+}
+@font-face{
+  font-family:'Poppins';
+  src:url('media/fonts/Poppins-ExtraBold.ttf') format('truetype');
+  font-weight:800;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Poppins';
+  src:url('media/fonts/Poppins-ExtraBoldItalic.ttf') format('truetype');
+  font-weight:800;font-style:italic;font-display:swap;
+}
+@font-face{
+  font-family:'Poppins';
+  src:url('media/fonts/Poppins-Black.ttf') format('truetype');
+  font-weight:900;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Poppins';
+  src:url('media/fonts/Poppins-BlackItalic.ttf') format('truetype');
+  font-weight:900;font-style:italic;font-display:swap;
+}
+
 :root{
   --cream:#FFFFFF;
   --cream-deep:#F3E9CE;
@@ -660,7 +771,7 @@ header.scrolled .burger svg{color:var(--ink);}
   /* full-bleed: breaks out of the page's centered max-width container so
      the background/photo can run edge-to-edge under the fixed header */
   position:relative;width:100vw;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;
-  display:grid;grid-template-columns:1fr 1fr;align-items:stretch;
+  display:grid;grid-template-columns:0.75fr 1.25fr;align-items:stretch;
   background:#CC9670;
   min-height:620px;
 }
@@ -804,7 +915,13 @@ header.scrolled .burger svg{color:var(--ink);}
   text-align:left;
 }
 .hero-tagline{
-  font-family:'Poppins',sans-serif;font-style:bold;font-weight:300;
+  /* Kugile only has one weight/style (see its @font-face above), so this
+     is left at normal/400 rather than italic/600 like before — applying
+     bold or italic on top of a font that doesn't actually have those
+     faces just makes the browser fake-slant/fake-bold it, which usually
+     looks distorted for a display font like this. Poppins-Italic is the
+     fallback if Kugile fails to load for any reason. */
+  font-family:'Kugile','Poppins',sans-serif;font-style:normal;font-weight:400;
   font-size:clamp(22px,3vw,34px);line-height:1.25;
   margin-bottom:16px;max-width:420px;
   text-shadow:0 2px 14px rgba(0,0,0,.35); /* keeps it legible over busy/light parts of a photo */
@@ -847,9 +964,9 @@ header.scrolled .burger svg{color:var(--ink);}
    swap in a different photo for a slide later, these percentages will
    likely need adjusting to match the new photo's composition — search
    for "hero-content-1/2/3" to find these. */
-.hero-content-1{left:25%;bottom:30%;}
-.hero-content-2{left:61%;bottom:45%;}
-.hero-content-3{left:17%;bottom:32%;}
+.hero-content-1{left:60%;bottom:55%;}
+.hero-content-2{left:15%;bottom:45%;}
+.hero-content-3{left:60%;bottom:32%;}
 .hero-cta{
   display:inline-block;
   padding:15px 42px;
