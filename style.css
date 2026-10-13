@@ -1374,6 +1374,12 @@ header.scrolled .burger svg{color:var(--ink);}
 
 /* ---------- PHILOSOPHY ---------- */
 .philosophy{
+  /* NOTE: nothing in the current markup has just class="philosophy" alone
+     anymore — the homepage philosophy section was converted from an image
+     to real text (search "philosophy-banner" below), so this rule (and
+     the two below it) are orphaned leftovers that don't match anything.
+     Left in place rather than deleted in case you want to reference the
+     old styling, but safe to remove entirely if you'd rather clean it up. */
   position:relative;
   padding:90px 0 100px;text-align:center;overflow:hidden;
 }
@@ -1394,7 +1400,7 @@ header.scrolled .burger svg{color:var(--ink);}
    colors from the component it was adapted from, so it stays visually
    consistent with the rest of the site. */
 .philosophy-banner{
-  width:100%;max-width:1050px;margin:0 auto;
+  width:100%;max-width:1050px;margin:0 auto 24px; /* bottom value = a small real gap before the footer below it */
   background:var(--olive-dark);
   padding:70px 40px 60px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
