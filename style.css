@@ -1406,6 +1406,13 @@ header.scrolled .burger svg{color:var(--ink);}
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;
 }
+.philosophy-heading{
+  max-width:760px;
+  font-family:'Poppins',sans-serif;font-style:italic;font-weight:400;
+  font-size:clamp(14px,2.4vw,21px);line-height:1.6;letter-spacing:.01em;
+  color:var(--cream-deep);
+  margin-bottom:50px;
+}
 .philosophy-text{
   max-width:760px;
   font-family:'Poppins',sans-serif;font-style:italic;font-weight:400;
@@ -1429,6 +1436,7 @@ header.scrolled .burger svg{color:var(--ink);}
 
 @media(max-width:768px){
   .philosophy-banner{padding:50px 24px 45px;}
+  .philosophy-heading{font-size:16px;line-height:1.45;margin-bottom:40px;}
   .philosophy-text{font-size:16px;line-height:1.45;margin-bottom:40px;}
   .philosophy-icons{gap:40px;}
   .icon-wrapper{width:40px;height:40px;}
