@@ -893,57 +893,131 @@ header.scrolled .burger svg{color:var(--ink);}
    --olive variable for that reason. Font stays Poppins/italic to match
    the rest of the site's single-typeface rule, styled to echo the
    elegant serif look of the reference without introducing a second font. */
-.about-hero{
-  /* full-bleed: breaks out of the page's centered max-width container so
-     the background/photo can run edge-to-edge under the fixed header */
-  position:relative;width:100vw;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;
-  display:grid;grid-template-columns:0.75fr 1.25fr;align-items:stretch;
-  background:#CC9670;
-  min-height:620px;
+/* ---------- ABOUT PAGE: hero / split / pillars / philosophy / fabric grid / accordion / promise ---------- */
+.ab-hero{
+  text-align:center;padding:110px 24px 70px;max-width:800px;margin:0 auto;
 }
-.about-hero-text{
-  padding:110px 6% 90px 10%;
-  color:#FBF0E4;
-  display:flex;flex-direction:column;justify-content:center;
+.ab-hero-eyebrow{
+  display:block;font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--olive-dark);font-weight:600;margin-bottom:16px;
 }
-#pageBody .about-hero-title{
-  font-family:'Poppins',sans-serif;font-style:italic;font-weight:300;
-  font-size:clamp(40px,5vw,64px);color:#FBF0E4;margin-bottom:28px;
+.ab-hero-title{
+  font-family:'Poppins',sans-serif;font-weight:500;
+  font-size:clamp(34px,5vw,56px);line-height:1.2;color:var(--ink);
+  margin-bottom:22px;
 }
-#pageBody .about-hero-text p{
-  font-size:15px;line-height:1.85;color:rgba(255,255,255,.92);
-  max-width:480px;margin-bottom:18px;
+.ab-hero-body{
+  font-size:15px;line-height:1.8;color:var(--ink-soft);
+  max-width:560px;margin:0 auto 32px;
 }
-.about-hero-media{position:relative;min-height:340px;}
-.about-hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.ab-btn{
+  display:inline-block;padding:14px 34px;
+  border:1.5px solid var(--olive);color:var(--ink);background:transparent;
+  text-transform:uppercase;letter-spacing:.12em;font-size:12px;font-weight:600;
+  transition:background .3s ease, color .3s ease, transform .3s ease;
+}
+.ab-btn:hover{background:var(--olive);color:var(--white);transform:translateY(-2px);}
 
-.about-founder{
-  max-width:760px;margin:0 auto;padding:100px 40px 120px;
+.ab-split{
+  max-width:1200px;margin:0 auto;padding:70px 40px 100px;
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
 }
-#pageBody .about-founder-title{
-  font-family:'Poppins',sans-serif;font-style:italic;font-weight:300;
-  font-size:clamp(30px,4vw,42px);color:#C98860;margin-bottom:32px;
+.ab-split-media img{width:100%;height:520px;object-fit:cover;}
+.ab-split-text h2{
+  font-family:'Poppins',sans-serif;font-weight:500;
+  font-size:clamp(26px,3vw,36px);color:var(--ink);margin-bottom:22px;
 }
-/* Extra breathing room above each subsequent heading when a section has
-   several (Our Philosophy / Our Fabric Story / Beyond Performance / etc
-   all sitting in one long block) — not needed above the very first one. */
-#pageBody .about-story-section .about-founder-title{margin-top:64px;}
-#pageBody .about-story-section .about-founder-title:first-child{margin-top:0;}
-#pageBody .about-founder p{
-  font-size:15px;line-height:1.85;color:var(--ink-soft);margin-bottom:18px;
+.ab-split-text p{font-size:14.5px;line-height:1.85;color:var(--ink-soft);margin-bottom:16px;}
+
+.ab-pillars{padding:90px 40px;background:var(--cream-deep);}
+.ab-fabric-section{background:var(--white);}
+.ab-section-header{text-align:center;max-width:640px;margin:0 auto 48px;}
+.ab-section-header h2{
+  font-family:'Poppins',sans-serif;font-weight:500;
+  font-size:clamp(26px,3vw,36px);color:var(--ink);margin-bottom:10px;
+  position:relative;display:inline-block;
 }
-#pageBody .about-founder-signature{
-  font-family:'Poppins',sans-serif;font-style:italic;font-size:20px;
-  color:#C98860;margin-top:24px;margin-bottom:2px !important;
+.ab-section-header h2::after{
+  content:'';display:block;width:40px;height:2px;background:var(--olive);
+  margin:12px auto 0;
 }
-#pageBody .about-founder-role{
-  font-size:13px;font-style:italic;color:var(--gray);margin-bottom:0 !important;
+.ab-section-header p{color:var(--ink-soft);font-size:14px;}
+
+.ab-pillars-grid{
+  max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:28px;
 }
+.ab-card{
+  background:var(--white);border-top:3px solid var(--olive);
+  padding:38px 28px;box-shadow:0 10px 30px rgba(20,18,14,.05);
+  text-align:left;transition:transform .3s ease;
+}
+.ab-card:hover{transform:translateY(-6px);}
+.ab-card-round{
+  border-top:none;text-align:center;border:1px solid var(--line);
+  box-shadow:0 4px 15px rgba(20,18,14,.03);
+}
+.ab-card-round:hover{border-color:var(--olive);transform:translateY(-5px);}
+.ab-card-icon{color:var(--olive-dark);margin-bottom:18px;}
+.ab-card-round .ab-card-icon{
+  width:56px;height:56px;margin:0 auto 18px;background:var(--cream-deep);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+}
+.ab-card-icon svg{width:28px;height:28px;}
+.ab-card h3{font-size:18px;font-weight:600;color:var(--ink);margin-bottom:10px;}
+.ab-card p{font-size:13.5px;line-height:1.7;color:var(--ink-soft);}
+
+.ab-philosophy{
+  text-align:center;padding:90px 24px;max-width:680px;margin:0 auto;
+}
+.ab-philosophy h2{
+  font-family:'Poppins',sans-serif;font-weight:500;
+  font-size:clamp(28px,4vw,40px);color:var(--ink);margin:10px 0 18px;
+}
+.ab-philosophy p{font-size:14.5px;line-height:1.85;color:var(--ink-soft);}
+
+.ab-faq-section{background:var(--cream-deep);padding:90px 24px;}
+.ab-faq-section h2{
+  text-align:center;font-family:'Poppins',sans-serif;font-weight:500;
+  font-size:clamp(26px,3vw,34px);color:var(--ink);margin-bottom:40px;
+}
+.ab-faq-container{max-width:760px;margin:0 auto;}
+.ab-faq-item{
+  background:var(--white);border-left:3px solid var(--olive);
+  margin-bottom:14px;box-shadow:0 2px 8px rgba(20,18,14,.03);
+  overflow:hidden;
+}
+.ab-faq-header{
+  width:100%;padding:20px 24px;background:none;border:none;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  text-align:left;font-size:14.5px;color:var(--ink);
+}
+.ab-faq-icon{
+  flex-shrink:0;color:var(--olive-dark);font-size:20px;line-height:1;
+  transition:transform .3s ease;
+}
+.ab-faq-item.open .ab-faq-icon{transform:rotate(45deg);}
+.ab-faq-content{
+  max-height:0;overflow:hidden;transition:max-height .4s ease, padding .4s ease;
+  padding:0 24px;
+}
+.ab-faq-item.open .ab-faq-content{max-height:200px;padding-bottom:20px;}
+.ab-faq-content p{font-size:13.5px;line-height:1.7;color:var(--ink-soft);}
+
+.ab-promise{
+  text-align:center;max-width:680px;margin:0 auto;padding:90px 24px 110px;
+}
+.ab-promise p{font-size:15px;line-height:1.85;color:var(--ink-soft);}
+.ab-promise-signature{
+  font-family:'Poppins',sans-serif;font-style:italic;font-size:22px;
+  color:var(--olive-dark);margin-top:26px !important;margin-bottom:4px !important;
+}
+.ab-promise-role{font-size:13px;font-style:italic;color:var(--gray);}
 
 @media(max-width:860px){
-  .about-hero{grid-template-columns:1fr;}
-  .about-hero-text{padding:70px 8% 50px;}
-  .about-hero-media{min-height:320px;}
+  .ab-split{grid-template-columns:1fr;gap:36px;padding:50px 24px 70px;}
+  .ab-split-media img{height:380px;}
+  .ab-pillars, .ab-fabric-section, .ab-faq-section{padding:60px 20px;}
 }
 
 /* ---------- SCROLL-REVEAL ANIMATION ---------- */
@@ -1030,7 +1104,7 @@ header.scrolled .burger svg{color:var(--ink);}
   border:1px solid rgba(255,255,255,.7);
   transition:background .25s, transform .25s;
 }
-.hero-dot:hover{background:rgba(255,255,255,.75);}
+.hero-dot:hover{background:#ffffffbf;}
 .hero-dot.active{background:var(--white);transform:scale(1.3);}
 
 .hero-content{

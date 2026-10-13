@@ -281,6 +281,17 @@ function initScrollReveal() {
   targets.forEach((el) => revealObserver.observe(el));
 }
 
+// "The Fabric, Explained" FAQ accordion on the About page. Delegated on
+// document (rather than querySelectorAll+forEach at load time) because
+// this content only exists inside #pageBody after showPage() copies it
+// in — a direct listener attached once at page load would miss it, since
+// it isn't there yet at that point.
+document.addEventListener('click', (event) => {
+  const header = event.target.closest('.ab-faq-header');
+  if (!header) return;
+  header.closest('.ab-faq-item').classList.toggle('open');
+});
+
 
 // ---------- 7) Switching between the homepage, a "Pages" sub-page, and the Shop page ----------
 // All three sections are siblings that get shown/hidden together, so this
