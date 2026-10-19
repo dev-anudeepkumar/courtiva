@@ -1402,7 +1402,7 @@ header.scrolled .burger svg{color:var(--ink);}
    consistent with the rest of the site. */
 .philosophy-banner{
   width:100%;max-width:1050px;margin:0 auto 24px; /* bottom value = a small real gap before the footer below it */
-  background:var(--olive-dark);
+  background:#D2AB66;
   padding:70px 40px 60px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;
@@ -1410,7 +1410,7 @@ header.scrolled .burger svg{color:var(--ink);}
 .philosophy-text{
   max-width:760px;
   font-family:'Poppins',sans-serif;font-style:italic;font-weight:400;
-  font-size:clamp(19px,2.4vw,26px);line-height:1.6;letter-spacing:.01em;
+  font-size:clamp(14px,2vw,20px);line-height:1.6;letter-spacing:.01em;
   color:var(--cream-deep);
   margin-bottom:50px;
 }
