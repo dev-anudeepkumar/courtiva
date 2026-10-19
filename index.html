@@ -216,6 +216,12 @@
     <h2 class="quick-view-title" id="quickViewTitle">Product Title</h2>
     <div class="quick-view-price" id="quickViewPrice">$0.00</div>
     <p class="quick-view-desc" id="quickViewDesc">Description.</p>
+    <!-- Hidden (via [hidden]) whenever the open product has no sizes at
+         all (e.g. an accessory) — see renderSizeSelector() in script.js -->
+    <div class="size-selector" id="quickViewSizeSelector" hidden>
+      <div class="size-selector-label">Select Size</div>
+      <div class="size-options" id="quickViewSizeOptions"></div>
+    </div>
     <div class="quick-view-qty">
       <button type="button" class="qty-btn" id="quickViewQtyMinus" aria-label="Decrease quantity">&minus;</button>
       <span id="quickViewQtyValue">1</span>
@@ -467,6 +473,11 @@
       <div class="product-info-price" id="productPrice">$0.00</div>
 
       <p class="product-info-desc" id="productDesc">Description.</p>
+
+      <div class="size-selector" id="productSizeSelector" hidden>
+        <div class="size-selector-label">Select Size</div>
+        <div class="size-options" id="productSizeOptions"></div>
+      </div>
 
       <div class="product-info-actions">
         <div class="quick-view-qty">
@@ -747,7 +758,6 @@
 
 <!-- ================= PHILOSOPHY ================= -->
 <section class="philosophy-banner">
-  <p class="philosophy-heading">The Courtiva Promise</p>
   <p class="philosophy-text">
     We believe the future of luxury sportswear isn't about pushing harder. It's about recovering smarter &ndash; creating garments that care for the women who wear them. Where thoughtful design meets innovative textiles. Where performance meets well-being. Where luxury meets purpose.
   </p>
@@ -795,24 +805,18 @@
 <footer id="footer">
   <div class="wrap">
     <div class="footer-top">
-      <div class="newsletter">
-        <h4>Stay in the Loop</h4>
-        <p>Sign up to get 10% off your first order and stay up to date on the latest product releases, special offers and news.</p>
-        <form class="signup" onsubmit="event.preventDefault(); this.querySelector('input').value=''; this.querySelector('button').textContent='Subscribed';">
-          <input type="email" placeholder="Your Email*" required>
-          <button type="submit">Subscribe</button>
-        </form>
-      </div>
       <div class="footer-links">
         <h4>Policy</h4>
         <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Return Policy</a></li>
           <li><a href="#" id="termsPolicyLink">Terms &amp; Conditions</a></li>
         </ul>
       </div>
       <div class="footer-links">
         <h4>Connect</h4>
         <ul>
-          <li><a href="#">TikTok</a></li>
+          <li><a href="https://www.tiktok.com/@courtivabykash" target="_blank" rel="noopener noreferrer">TikTok</a></li>
           <li><a href="https://www.instagram.com/courtivabykash" target="_blank" rel="noopener noreferrer">Instagram</a></li>
           <li><a href="https://www.facebook.com/share/r/18FXd4FNP8/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Facebook</a></li>
         </ul>
@@ -821,7 +825,8 @@
         <h4>Need Help?</h4>
         <p>If you have any questions regarding your order, please contact our customer service.</p>
         <p><strong>Hours</strong>Monday – Friday: 10:00 AM – 6:00 PM</p>
-        <p><strong>Phone</strong>+65 843460304</p>
+        <p><strong>Phone</strong>+65 84360304</p>
+        <p><strong>WhatsApp</strong><a href="https://wa.me/6584360304" target="_blank" rel="noopener noreferrer">Chat with us</a></p>
         <p><strong>Email</strong>care@courtiva.sg</p>
         <p><strong>Location</strong>Singapore, 247913</p>
       </div>
@@ -831,7 +836,7 @@
         <span>Visa</span><span>Amex</span><span>MC</span><span>PayPal</span><span>Apple&nbsp;Pay</span>
       </div>
       <div class="socials">
-        <a href="#" aria-label="TikTok"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z"/></svg></a>
+        <a href="https://www.tiktok.com/@courtivabykash" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z"/></svg></a>
         <a href="https://www.instagram.com/courtivabykash"  target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="3.4"/><circle cx="17" cy="7" r="1"/></svg></a>
         <a href="https://www.facebook.com/share/r/18FXd4FNP8/?mibextid=wwXIfr"  target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2 0-3.5 1.5-3.5 3.5V11H8v3h2.5v6h3v-6H16l.5-3h-3V9.8c0-.5.2-.8.5-.8z"/></svg></a>
       </div>
@@ -846,7 +851,13 @@
      this as null keeps the site working exactly as before, showing a
      plain "Checkout" placeholder button instead of real PayPal buttons.
      See SETUP.md for the full walkthrough. -->
+<!-- Set this to true to hide all prices across the site (product cards,
+     Quick View, the Product Page, cart, and wishlist) — useful for a
+     "coming soon" launch or an inquire-for-pricing catalog. Cart math
+     still works normally behind the scenes; this only hides the price
+     TEXT visitors see. Flip back to false to show prices again. -->
 <script>
+  window.HIDE_PRODUCT_PRICES = false;
   window.PAYPAL_CLIENT_ID = null; // e.g. "AeA1QIZXiflr1_-r0iMvSuGz-abc123..."
   window.PAYPAL_CURRENCY = 'USD';
 </script>

@@ -585,6 +585,7 @@ header.scrolled .burger svg{color:var(--ink);}
   padding:18px 0;border-bottom:1px solid var(--line);
 }
 .cart-item-name{font-size:13px;font-weight:500;margin-bottom:4px;}
+.cart-item-size{font-size:11.5px;color:var(--gray);margin-bottom:4px;}
 .cart-item-price{font-size:12px;color:var(--gray);}
 .cart-item-qty{display:flex;align-items:center;gap:10px;}
 .qty-btn{
@@ -1401,22 +1402,15 @@ header.scrolled .burger svg{color:var(--ink);}
    consistent with the rest of the site. */
 .philosophy-banner{
   width:100%;max-width:1050px;margin:0 auto 24px; /* bottom value = a small real gap before the footer below it */
-  background:#D2AB66;
+  background:var(--olive-dark);
   padding:70px 40px 60px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;
 }
-.philosophy-heading{
-  max-width:760px;
-  font-family:'Poppins',sans-serif;font-style:italic;font-weight:400;
-  font-size:clamp(14px,2.4vw,21px);line-height:1.6;letter-spacing:.01em;
-  color:var(--cream-deep);
-  margin-bottom:50px;
-}
 .philosophy-text{
   max-width:760px;
   font-family:'Poppins',sans-serif;font-style:italic;font-weight:400;
-  font-size:clamp(14px,2.4vw,21px);line-height:1.6;letter-spacing:.01em;
+  font-size:clamp(19px,2.4vw,26px);line-height:1.6;letter-spacing:.01em;
   color:var(--cream-deep);
   margin-bottom:50px;
 }
@@ -1436,8 +1430,7 @@ header.scrolled .burger svg{color:var(--ink);}
 
 @media(max-width:768px){
   .philosophy-banner{padding:50px 24px 45px;}
-  .philosophy-heading{font-size:18px;line-height:1.45;margin-bottom:40px;}
-  .philosophy-text{font-size:16px;line-height:1.45;margin-bottom:40px;}
+  .philosophy-text{font-size:20px;line-height:1.45;margin-bottom:40px;}
   .philosophy-icons{gap:40px;}
   .icon-wrapper{width:40px;height:40px;}
 }
@@ -1446,27 +1439,19 @@ header.scrolled .burger svg{color:var(--ink);}
 /* ---------- FOOTER ---------- */
 footer{background:var(--ink);color:#D9D4C8;padding-top:80px;}
 .footer-top{
-  display:grid;grid-template-columns:1.4fr 1fr 1fr 1.3fr;gap:40px;
+  display:grid;grid-template-columns:1fr 1fr 1.6fr;gap:40px;
   padding-bottom:60px;border-bottom:1px solid rgba(255,255,255,.12);
 }
 .footer-top h4{
   font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--white);margin-bottom:20px;
-}
-.newsletter p{font-size:13px;line-height:1.7;color:#AFA99B;margin-bottom:22px;max-width:320px;}
-.signup{display:flex;border-bottom:1px solid rgba(255,255,255,.3);max-width:320px;}
-.signup input{
-  flex:1;background:none;border:none;padding:10px 0;color:var(--white);font-size:13px;
-}
-.signup input::placeholder{color:#8A8578;}
-.signup button{
-  font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--olive);
-  white-space:nowrap;padding:10px 4px;
 }
 .footer-links ul{list-style:none;}
 .footer-links li{margin-bottom:11px;}
 .footer-links a{font-size:13px;color:#AFA99B;transition:color .2s;}
 .footer-links a:hover{color:var(--white);}
 .contact p{font-size:13px;line-height:1.7;color:#AFA99B;margin-bottom:16px;}
+.contact p a{color:#AFA99B;text-decoration:underline;text-underline-offset:2px;transition:color .2s;}
+.contact p a:hover{color:var(--white);}
 .contact strong{color:var(--white);display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px;}
 .footer-bottom{
   display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;
@@ -1540,4 +1525,47 @@ footer{background:var(--ink);color:#D9D4C8;padding-top:80px;}
   .hero-content-1, .hero-content-2, .hero-content-3{
     left:24px;right:24px;bottom:90px;text-align:center;
   }
+}
+
+/* ---------- HIDE PRICES (toggle via window.HIDE_PRODUCT_PRICES in index.html) ---------- */
+/* script.js adds this class to <body> on load when the toggle is on —
+   see "Hide prices" in script.js. Cart/checkout math is unaffected;
+   this only hides the price TEXT visitors see. */
+body.prices-hidden .product-price,
+body.prices-hidden .quick-view-price,
+body.prices-hidden .product-info-price,
+body.prices-hidden .cart-item-price,
+body.prices-hidden .cart-subtotal-row,
+body.prices-hidden .wishlist-col-price{
+  display:none !important;
+}
+
+/* ---------- SIZE SELECTOR (Quick View + Product Page) ---------- */
+/* Only appears when a product's data.json lists a "sizes" array —
+   accessories without sizes (a visor, a tote) simply never render this
+   row at all, so nothing needs hiding for those. */
+.size-selector{margin:18px 0;}
+.size-selector-label{
+  font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);
+  margin-bottom:10px;
+}
+.size-options{display:flex;flex-wrap:wrap;gap:8px;}
+.size-option{
+  min-width:44px;height:40px;padding:0 12px;
+  border:1px solid var(--line);background:var(--white);color:var(--ink);
+  font-size:12.5px;letter-spacing:.03em;
+  transition:border-color .2s ease, background .2s ease, color .2s ease;
+}
+.size-option:hover{border-color:var(--olive);}
+.size-option.selected{
+  border-color:var(--ink);background:var(--ink);color:var(--white);
+}
+/* Brief highlight if Add to Cart is clicked with no size chosen yet —
+   see "size-selector" handling in script.js */
+.size-selector.size-needed .size-selector-label{color:#B5433B;}
+.size-selector.size-needed .size-options{animation:sizeNudge .4s ease;}
+@keyframes sizeNudge{
+  0%,100%{transform:translateX(0);}
+  25%{transform:translateX(-4px);}
+  75%{transform:translateX(4px);}
 }

@@ -24,7 +24,6 @@ const backHomeLink = document.querySelector('.back-home');
 const homeNavLinks = document.querySelectorAll('.navlink-home');
 const shopNavLinks = document.querySelectorAll('.navlink-shop');
 const tabs = document.querySelectorAll('.tab');
-const signupForm = document.querySelector('.signup');
 const cartButton = document.getElementById('cartButton');
 const cartCountEl = document.getElementById('cartCount');
 const wishlistButton = document.getElementById('wishlistButton');
@@ -52,6 +51,8 @@ const quickViewBadge = document.getElementById('quickViewBadge');
 const quickViewBrand = document.getElementById('quickViewBrand');
 const quickViewTitle = document.getElementById('quickViewTitle');
 const quickViewPrice = document.getElementById('quickViewPrice');
+const quickViewSizeSelector = document.getElementById('quickViewSizeSelector');
+const quickViewSizeOptions = document.getElementById('quickViewSizeOptions');
 const quickViewDesc = document.getElementById('quickViewDesc');
 const quickViewQtyValue = document.getElementById('quickViewQtyValue');
 const quickViewQtyMinus = document.getElementById('quickViewQtyMinus');
@@ -71,6 +72,8 @@ const productBrand = document.getElementById('productBrand');
 const productTitle = document.getElementById('productTitle');
 const productRatingRow = document.getElementById('productRatingRow');
 const productPrice = document.getElementById('productPrice');
+const productSizeSelector = document.getElementById('productSizeSelector');
+const productSizeOptions = document.getElementById('productSizeOptions');
 const productDesc = document.getElementById('productDesc');
 const productQtyValue = document.getElementById('productQtyValue');
 const productQtyMinus = document.getElementById('productQtyMinus');
@@ -90,7 +93,17 @@ const recentlyViewedSection = document.getElementById('recentlyViewedSection');
 const recentlyViewedGrid = document.getElementById('recentlyViewedGrid');
 
 
-// ---------- 1) Header text color ----------
+// ---------- 1) Hide prices (toggle via window.HIDE_PRODUCT_PRICES in index.html) ----------
+// Adds .prices-hidden to <body> when the toggle is on — style.css then
+// hides every price display (product cards, Quick View, Product Page,
+// cart, wishlist) via that class. Cart/checkout math is untouched; this
+// only affects what's shown to visitors.
+if (window.HIDE_PRODUCT_PRICES) {
+  document.body.classList.add('prices-hidden');
+}
+
+
+// ---------- 2) Header text color ----------
 // The header needs dark text once you scroll past the hero image, OR
 // whenever a "Pages" sub-page (About Us, FAQ, etc.) or the Shop page is
 // open — because those have a plain white background, not the dark
@@ -104,7 +117,7 @@ window.addEventListener('scroll', onScroll);
 onScroll(); // run once on load in case the page opens mid-scroll
 
 
-// ---------- 2) Mobile nav menu ----------
+// ---------- 3) Mobile nav menu ----------
 // Below 980px wide, the header hides the normal nav links and shows this
 // burger button instead (see style.css, ".navlinks{display:none}" and
 // ".burger{display:block}" inside the 980px breakpoint) — this is what
@@ -137,7 +150,7 @@ if (burgerButton) {
 }
 
 
-// ---------- 3) Hero banner carousel ----------
+// ---------- 4) Hero banner carousel ----------
 // Auto-advances every 6 seconds, pauses while the visitor's mouse is over
 // the hero, and can be controlled manually with the dots or the arrow
 // buttons (either of which also resets the auto-advance timer, so it
@@ -198,7 +211,7 @@ if (heroCarousel && heroSlides.length > 1) {
 }
 
 
-// ---------- 4) "Featured / New / Top Rated" product tabs ----------
+// ---------- 5) "Featured / New / Top Rated" product tabs ----------
 tabs.forEach((tab) => {
   tab.addEventListener('click', () => {
     tabs.forEach((t) => t.classList.remove('active'));
@@ -210,7 +223,7 @@ tabs.forEach((tab) => {
 });
 
 
-// ---------- 5) Loading each page's text from the #pageSources block ----------
+// ---------- 6) Loading each page's text from the #pageSources block ----------
 // The wording for each "Pages" dropdown entry is written directly in
 // index.html inside <div id="pageSources" hidden> — one <div data-page="...">
 // per page, holding its <p> paragraphs. Reading it here is just copying
@@ -230,7 +243,7 @@ function loadPageText(pageName) {
 }
 
 
-// ---------- 6) Scroll-reveal animation (used on the About Us page) ----------
+// ---------- 7) Scroll-reveal animation (used on the About Us page) ----------
 // Any element marked data-reveal fades/slides into place once it scrolls
 // into view, rather than just appearing instantly. This is written to work
 // on whichever page is currently showing, not just About Us specifically —
@@ -293,7 +306,7 @@ document.addEventListener('click', (event) => {
 });
 
 
-// ---------- 7) Switching between the homepage, a "Pages" sub-page, and the Shop page ----------
+// ---------- 8) Switching between the homepage, a "Pages" sub-page, and the Shop page ----------
 // All three sections are siblings that get shown/hidden together, so this
 // one helper is the single place that decides which one is visible.
 function setActiveSection(section) {
@@ -376,7 +389,7 @@ shopNavLinks.forEach((link) => {
 });
 
 
-// ---------- 8) Shop page: category filter + sorting ----------
+// ---------- 9) Shop page: category filter + sorting ----------
 // Products are plain HTML (<article class="product-card">) rather than
 // data pulled from JS, which keeps things simple — filtering/sorting just
 // hides cards or reorders the existing elements in the page, it doesn't
@@ -449,8 +462,41 @@ function formatPrice(amount) {
   return `$${amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
+// Builds the row of size buttons for Quick View or the Product Page.
+// Hides the whole selector (via [hidden]) when a product has no sizes at
+// all — an accessory like a visor or tote never shows this row. Returns
+// nothing; onSelect(size) is called whenever the visitor picks one.
+function renderSizeSelector(wrapperEl, optionsEl, sizes, onSelect) {
+  if (!sizes || sizes.length === 0) {
+    wrapperEl.hidden = true;
+    optionsEl.innerHTML = '';
+    return;
+  }
+  wrapperEl.hidden = false;
+  wrapperEl.classList.remove('size-needed');
+  optionsEl.innerHTML = sizes
+    .map((size) => `<button type="button" class="size-option" data-size="${escapeAttr(size)}">${escapeHtml(size)}</button>`)
+    .join('');
+  optionsEl.querySelectorAll('.size-option').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      optionsEl.querySelectorAll('.size-option').forEach((b) => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      wrapperEl.classList.remove('size-needed');
+      onSelect(btn.dataset.size);
+    });
+  });
+}
 
-// ---------- 9) Shopping cart ----------
+// Briefly highlights the size row (a small shake + red label) when
+// someone tries to add to cart without picking a size first.
+function nudgeSizeSelector(wrapperEl) {
+  wrapperEl.classList.remove('size-needed');
+  void wrapperEl.offsetWidth; // forces the browser to notice the class was removed, so re-adding it restarts the animation
+  wrapperEl.classList.add('size-needed');
+}
+
+
+// ---------- 10) Shopping cart ----------
 // Cart items are saved to localStorage, so the cart survives a page
 // refresh (but is specific to this browser — there's no server involved).
 const CART_STORAGE_KEY = 'courtiva-cart';
@@ -512,6 +558,7 @@ function renderCartDrawer() {
       row.innerHTML = `
         <div class="cart-item-info">
           <p class="cart-item-name">${item.name}</p>
+          ${item.size ? `<p class="cart-item-size">Size: ${item.size}</p>` : ''}
           <p class="cart-item-price">${formatPrice(item.price)}</p>
         </div>
         <div class="cart-item-qty">
@@ -546,17 +593,21 @@ function closeCart() {
   cartOverlay.classList.remove('open');
 }
 
-function addToCart(id, name, price, qty = 1) {
-  // Matched by id, not name — a few products (Aurelia, Sena, Viora) share
-  // a display name across two genuinely different items (one in the Shop,
-  // one in Featured Products), so name alone isn't a safe way to tell
-  // cart line items apart. Falls back to matching by name for any cart
-  // already saved in a visitor's browser from before this existed.
-  const existing = cart.find((item) => (item.id && id ? item.id === id : item.name === name));
+function addToCart(id, name, price, qty = 1, size = null) {
+  // Matched by id + size together, not just id — the same product in two
+  // different sizes needs to stay as two separate cart lines (same as
+  // any real clothing store), not get merged into one. Products with no
+  // sizes at all (size is null here) still match by id alone, same as
+  // before. Falls back to matching by name for any cart already saved in
+  // a visitor's browser from before "id" existed as a field.
+  const existing = cart.find((item) => {
+    const sameProduct = item.id && id ? item.id === id : item.name === name;
+    return sameProduct && (item.size || null) === (size || null);
+  });
   if (existing) {
     existing.qty += qty;
   } else {
-    cart.push({ id, name, price, qty });
+    cart.push({ id, name, price, qty, size });
   }
   updateCartUI();
   openCart(); // show the drawer so the user gets visual confirmation
@@ -586,6 +637,23 @@ document.addEventListener('click', (event) => {
   event.preventDefault();
   const card = button.closest('.product-card');
   if (!card) return;
+
+  // Grid cards (Shop page, Featured Products) have no size selector of
+  // their own — only Quick View and the Product Page do. So a product
+  // that HAS sizes can't be added directly from here; open Quick View
+  // instead so the visitor can actually pick one, rather than silently
+  // adding it with no size chosen.
+  let sizes = [];
+  try {
+    sizes = JSON.parse(card.dataset.sizes || '[]');
+  } catch (err) {
+    sizes = [];
+  }
+  if (sizes.length > 0) {
+    openQuickView(card);
+    return;
+  }
+
   addToCart(card.dataset.productId, card.dataset.name, parseFloat(card.dataset.price));
 });
 
@@ -722,7 +790,7 @@ initPayPalCheckout();
 updateCartUI();
 
 
-// ---------- 10) Reading a product card's details ----------
+// ---------- 11) Reading a product card's details ----------
 // Both Quick View and the Product Overview page need the same
 // information out of whichever <article class="product-card"> was
 // clicked, so it's pulled together here once instead of twice.
@@ -736,6 +804,12 @@ function getProductDataFromCard(card) {
   const badgeHTML = card.querySelector('.badge')?.innerHTML || null;
   const rating = card.querySelector('.product-rating') ? true : false;
   const category = card.dataset.category || null;
+  let sizes = [];
+  try {
+    sizes = JSON.parse(card.dataset.sizes || '[]');
+  } catch (err) {
+    sizes = [];
+  }
 
   // The card itself only ever has ONE <img> (its cover photo) — the full
   // gallery for the Product Page comes from the catalog data this card
@@ -745,23 +819,25 @@ function getProductDataFromCard(card) {
     ? getProductImages(catalogEntry).map((file) => `${PRODUCTS_BASE}/${card.dataset.productId}/${file}`)
     : [imgSrc];
 
-  return { id: card.dataset.productId, name: card.dataset.name, title, brand, price, desc, imgSrc, imgAlt, badgeHTML, rating, category, images };
+  return { id: card.dataset.productId, name: card.dataset.name, title, brand, price, desc, imgSrc, imgAlt, badgeHTML, rating, category, images, sizes };
 }
 
 
-// ---------- 11) Quick View modal ----------
+// ---------- 12) Quick View modal ----------
 // Clicking "Quick View" on a product card reads that card's details
 // (via getProductDataFromCard above) and fills in the modal, rather
 // than needing a separate page or a second copy of each product's
 // details anywhere.
 let quickViewProduct = null; // { id, name, price } of whatever's currently open
 let quickViewQty = 1;
+let quickViewSelectedSize = null;
 
 function openQuickView(card) {
   const data = getProductDataFromCard(card);
 
   quickViewProduct = { id: data.id, name: data.name, price: data.price };
   quickViewQty = 1;
+  quickViewSelectedSize = null;
 
   quickViewBrand.textContent = data.brand;
   quickViewTitle.textContent = data.title;
@@ -772,6 +848,9 @@ function openQuickView(card) {
   quickViewBadge.hidden = !data.badgeHTML;
   if (data.badgeHTML) quickViewBadge.innerHTML = data.badgeHTML;
   quickViewQtyValue.textContent = quickViewQty;
+  renderSizeSelector(quickViewSizeSelector, quickViewSizeOptions, data.sizes, (size) => {
+    quickViewSelectedSize = size;
+  });
 
   // reflect this product's real wishlist state (rather than always
   // resetting to "not wishlisted") — syncWishlistIcons() also does this,
@@ -821,7 +900,13 @@ quickViewQtyPlus.addEventListener('click', () => {
 
 quickViewAddToCart.addEventListener('click', () => {
   if (!quickViewProduct) return;
-  addToCart(quickViewProduct.id, quickViewProduct.name, quickViewProduct.price, quickViewQty);
+  // If this product has sizes (the row isn't hidden) but none is picked
+  // yet, nudge the size row instead of silently adding with no size.
+  if (!quickViewSizeSelector.hidden && !quickViewSelectedSize) {
+    nudgeSizeSelector(quickViewSizeSelector);
+    return;
+  }
+  addToCart(quickViewProduct.id, quickViewProduct.name, quickViewProduct.price, quickViewQty, quickViewSelectedSize);
   closeQuickView(); // addToCart() already opens the cart drawer to confirm
 });
 
@@ -859,7 +944,7 @@ quickViewShare.addEventListener('click', async () => {
 });
 
 
-// ---------- 12) Product Overview Page ----------
+// ---------- 13) Product Overview Page ----------
 // One page template, filled in with whichever product was clicked —
 // see getProductDataFromCard() above for where the details come from.
 // Clicking a product's photo or name (anywhere: Shop page, Featured
@@ -867,6 +952,7 @@ quickViewShare.addEventListener('click', async () => {
 // delegation, the same pattern used for Add to Cart and Quick View.
 let productPageProduct = null; // { id, name, price } of whatever's currently open
 let productPageQty = 1;
+let productPageSelectedSize = null;
 
 // Turns a product name into a short, deterministic, decorative SKU —
 // this is NOT a real inventory code, just something to fill that field
@@ -986,6 +1072,7 @@ function openProductPage(card) {
 
   productPageProduct = { id: data.id, name: data.name, price: data.price };
   productPageQty = 1;
+  productPageSelectedSize = null;
 
   productBrand.textContent = data.brand;
   productTitle.textContent = data.title;
@@ -995,6 +1082,9 @@ function openProductPage(card) {
   productBadge.hidden = !data.badgeHTML;
   if (data.badgeHTML) productBadge.innerHTML = data.badgeHTML;
   productQtyValue.textContent = productPageQty;
+  renderSizeSelector(productSizeSelector, productSizeOptions, data.sizes, (size) => {
+    productPageSelectedSize = size;
+  });
 
   productRatingRow.hidden = !data.rating;
 
@@ -1077,7 +1167,11 @@ productQtyPlus.addEventListener('click', () => {
 
 productAddToCart.addEventListener('click', () => {
   if (!productPageProduct) return;
-  addToCart(productPageProduct.id, productPageProduct.name, productPageProduct.price, productPageQty);
+  if (!productSizeSelector.hidden && !productPageSelectedSize) {
+    nudgeSizeSelector(productSizeSelector);
+    return;
+  }
+  addToCart(productPageProduct.id, productPageProduct.name, productPageProduct.price, productPageQty, productPageSelectedSize);
 });
 
 // Same reasoning as the Quick View wishlist button above.
@@ -1108,7 +1202,7 @@ productShare.addEventListener('click', async () => {
 });
 
 
-// ---------- 13) Wishlist ----------
+// ---------- 14) Wishlist ----------
 // A single shared wishlist (an array of product names) drives the heart
 // icon on every product card, the header count badge, and the Wishlist
 // page's table — they all read/write the same localStorage-backed
@@ -1278,7 +1372,21 @@ wishlistRows.addEventListener('click', (event) => {
     toggleWishlist(name);
   } else if (event.target.closest('[data-wishlist-add-to-cart]')) {
     const card = findCardByName(name);
-    if (card) addToCart(card.dataset.productId, name, parseFloat(card.dataset.price));
+    if (!card) return;
+    // Same reasoning as the grid cards above — the wishlist table has no
+    // size selector of its own, so a sized product needs to go to the
+    // Product Page (which does) rather than being added with no size.
+    let sizes = [];
+    try {
+      sizes = JSON.parse(card.dataset.sizes || '[]');
+    } catch (err) {
+      sizes = [];
+    }
+    if (sizes.length > 0) {
+      openProductPage(card);
+      return;
+    }
+    addToCart(card.dataset.productId, name, parseFloat(card.dataset.price));
   } else if (event.target.closest('[data-wishlist-view]')) {
     event.preventDefault();
     const card = findCardByName(name);
@@ -1352,7 +1460,7 @@ updateWishlistBadge();
 syncWishlistIcons();
 
 
-// ---------- 14) Product catalog: loaded from media/products/ ----------
+// ---------- 15) Product catalog: loaded from media/products/ ----------
 // This is what makes adding/removing/editing products "plug and play" —
 // every product card on the site (Shop page AND Featured Products) is
 // built from data read out of media/products/manifest.json and each
@@ -1428,7 +1536,7 @@ function renderShopCardHTML(id, data) {
     : '<button type="button" class="quick-add" data-add-to-cart>Add to Cart</button>';
 
   return `
-    <article class="product-card" data-name="${escapeAttr(data.name)}" data-price="${data.price.toFixed(2)}" data-category="${escapeAttr(data.category)}" data-product-id="${escapeAttr(id)}" data-desc="${escapeAttr(data.description)}">
+    <article class="product-card" data-name="${escapeAttr(data.name)}" data-price="${data.price.toFixed(2)}" data-category="${escapeAttr(data.category)}" data-product-id="${escapeAttr(id)}" data-desc="${escapeAttr(data.description)}" data-sizes="${escapeAttr(JSON.stringify(data.sizes || []))}">
       <div class="product-img">
         <button type="button" class="wishlist-icon-btn" data-wishlist-toggle aria-label="Add to Wishlist">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.8-9.8-9.2C.7 7.4 2.3 4 5.8 4c2 0 3.4 1.1 4.2 2.4C10.8 5.1 12.2 4 14.2 4c3.5 0 5.1 3.4 3.6 6.8C15.5 15.2 12 20 12 20z"/></svg>
@@ -1452,7 +1560,7 @@ function renderFeaturedCardHTML(id, data) {
   const imgAlt = data.tagline || data.name;
 
   return `
-    <article class="product-card" data-name="${escapeAttr(data.name)}" data-price="${data.price.toFixed(2)}" data-brand="${escapeAttr(data.brand)}" data-desc="${escapeAttr(data.description)}" data-product-id="${escapeAttr(id)}">
+    <article class="product-card" data-name="${escapeAttr(data.name)}" data-price="${data.price.toFixed(2)}" data-brand="${escapeAttr(data.brand)}" data-desc="${escapeAttr(data.description)}" data-product-id="${escapeAttr(id)}" data-sizes="${escapeAttr(JSON.stringify(data.sizes || []))}">
       <div class="product-img">
         <button type="button" class="wishlist-icon-btn" data-wishlist-toggle aria-label="Add to Wishlist">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.8-9.8-9.2C.7 7.4 2.3 4 5.8 4c2 0 3.4 1.1 4.2 2.4C10.8 5.1 12.2 4 14.2 4c3.5 0 5.1 3.4 3.6 6.8C15.5 15.2 12 20 12 20z"/></svg>
@@ -1549,7 +1657,7 @@ async function loadProductCatalog() {
 loadProductCatalog();
 
 
-// ---------- 15) Launch announcement popup ----------
+// ---------- 16) Launch announcement popup ----------
 // Shows once, a couple seconds after the page first loads, then
 // remembers (via localStorage) that this visitor has already seen it
 // so it won't interrupt them again on a later visit. Closing it any
@@ -1596,9 +1704,9 @@ if (launchPopup && launchPopupOverlay) {
     if (event.key === 'Escape' && launchPopup.classList.contains('open')) closeLaunchPopup();
   });
 
-  // Front-end only demo, same as the footer's newsletter form below —
-  // doesn't actually send the email anywhere yet. Connect both to a
-  // real backend or a service like Mailchimp/Klaviyo when you're ready.
+  // Front-end only demo — doesn't actually send the email anywhere
+  // yet. Connect to a real backend or a service like Mailchimp/Klaviyo
+  // when you're ready.
   if (launchPopupForm) {
     launchPopupForm.addEventListener('submit', (event) => {
       event.preventDefault();
@@ -1610,7 +1718,7 @@ if (launchPopup && launchPopupOverlay) {
 }
 
 
-// ---------- 16) Terms & Conditions popup ----------
+// ---------- 17) Terms & Conditions popup ----------
 // Clicking "Terms & Conditions" in the footer opens this instead of
 // navigating anywhere — it's the same policy content, just shown as a
 // popup. Reuses the exact same open/close pattern as the launch popup
@@ -1643,17 +1751,3 @@ if (termsPolicyLink && policiesPopup && policiesPopupOverlay) {
   });
 }
 
-
-// ---------- 17) Newsletter signup form (front-end only demo) ----------
-if (signupForm) {
-  signupForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const input = signupForm.querySelector('input');
-    const button = signupForm.querySelector('button');
-    input.value = '';
-    button.textContent = 'Subscribed';
-    // NOTE: this doesn't send the email anywhere yet.
-    // To actually collect emails, connect this to a backend
-    // or a service like Mailchimp / ConvertKit / Klaviyo.
-  });
-}
