@@ -467,6 +467,10 @@ function formatPrice(amount) {
 // Hides the whole selector (via [hidden]) when a product has no sizes at
 // all — an accessory like a visor or tote never shows this row. Returns
 // nothing; onSelect(size) is called whenever the visitor picks one.
+// Default sizes (see loadProductCatalog). Edit these to change them site-wide.
+const DEFAULT_APPAREL_SIZES = ['XS', 'S', 'M', 'L', 'XL'];
+const DEFAULT_ACCESSORY_SIZES = ['One Size'];
+
 function renderSizeSelector(wrapperEl, optionsEl, sizes, onSelect) {
   if (!sizes || sizes.length === 0) {
     wrapperEl.hidden = true;
@@ -486,6 +490,8 @@ function renderSizeSelector(wrapperEl, optionsEl, sizes, onSelect) {
       onSelect(btn.dataset.size);
     });
   });
+  // Only one size (e.g. "One Size")? Pick it automatically.
+  if (sizes.length === 1) optionsEl.querySelector('.size-option').click();
 }
 
 // Briefly highlights the size row (a small shake + red label) when
@@ -650,12 +656,12 @@ document.addEventListener('click', (event) => {
   } catch (err) {
     sizes = [];
   }
-  if (sizes.length > 0) {
+  if (sizes.length > 1) {
     openQuickView(card);
     return;
   }
 
-  addToCart(card.dataset.productId, card.dataset.name, parseFloat(card.dataset.price));
+  addToCart(card.dataset.productId, card.dataset.name, parseFloat(card.dataset.price), 1, sizes[0] || null);
 });
 
 // Header cart icon opens the drawer; overlay/× button close it
@@ -1603,6 +1609,15 @@ async function loadProductCatalog() {
       }
     })
   );
+
+  // Every product gets sizes on its product page. A product's own
+  // data.json can list "sizes": [...] to override; otherwise clothing
+  // gets DEFAULT_APPAREL_SIZES and accessories get DEFAULT_ACCESSORY_SIZES.
+  Object.values(dataById).forEach((data) => {
+    if (!Array.isArray(data.sizes) || data.sizes.length === 0) {
+      data.sizes = data.category === 'accessories' ? DEFAULT_ACCESSORY_SIZES.slice() : DEFAULT_APPAREL_SIZES.slice();
+    }
+  });
 
   productCatalogById = dataById;
 

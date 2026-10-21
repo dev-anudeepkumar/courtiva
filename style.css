@@ -1569,3 +1569,9 @@ body.prices-hidden .wishlist-col-price{
   25%{transform:translateX(-4px);}
   75%{transform:translateX(4px);}
 }
+
+/* ---------- Client requests (2026-10-21) ----------
+   Delete a rule below to bring that element back. */
+.featured[hidden]{display:none;}          /* "Curated For You" section on the homepage */
+#cartButton{display:none;}                /* cart icon in the header */
+.wishlist-add-btn{display:none;}          /* "+ Add to Cart" in the wishlist */
