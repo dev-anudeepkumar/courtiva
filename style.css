@@ -1575,3 +1575,6 @@ body.prices-hidden .wishlist-col-price{
 .featured[hidden]{display:none;}          /* "Curated For You" section on the homepage */
 #cartButton{display:none;}                /* cart icon in the header */
 .wishlist-add-btn{display:none;}          /* "+ Add to Cart" in the wishlist */
+[data-add-to-cart]{display:none !important;}  /* "Add to Cart" on product cards (Collections page, related products) */
+.product-info-actions{display:none;}      /* quantity + "Add to Cart" on product pages */
+#quickViewAddToCart,.quick-view-qty{display:none;}  /* quantity + "Add to Cart" in Quick View */
