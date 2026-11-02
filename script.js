@@ -1643,53 +1643,6 @@ async function loadProductCatalog() {
 loadProductCatalog();
 
 
-// ---------- 16) Launch announcement popup ----------
-// Shows once, a couple seconds after the page first loads, then
-// remembers (via localStorage) that this visitor has already seen it
-// so it won't interrupt them again on a later visit. Closing it any
-// way — the X, "No thanks", the overlay, or Escape — all count as
-// "seen" the same way.
-const LAUNCH_POPUP_SEEN_KEY = 'courtiva-launch-popup-seen';
-const LAUNCH_POPUP_DELAY_MS = 2500;
-
-const launchPopup = document.getElementById('launchPopup');
-const launchPopupOverlay = document.getElementById('launchPopupOverlay');
-const launchPopupForm = document.getElementById('launchPopupForm');
-
-function openLaunchPopup() {
-  launchPopup.classList.add('open');
-  launchPopupOverlay.classList.add('open');
-}
-
-function closeLaunchPopup() {
-  launchPopup.classList.remove('open');
-  launchPopupOverlay.classList.remove('open');
-  try {
-    localStorage.setItem(LAUNCH_POPUP_SEEN_KEY, 'true');
-  } catch (err) {
-    console.warn('Could not save that the launch popup was seen.', err);
-  }
-}
-
-if (launchPopup && launchPopupOverlay) {
-  let alreadySeen = false;
-  try {
-    alreadySeen = localStorage.getItem(LAUNCH_POPUP_SEEN_KEY) === 'true';
-  } catch (err) {
-    console.warn('Could not read launch popup state.', err);
-  }
-
-  if (!alreadySeen) {
-    setTimeout(openLaunchPopup, LAUNCH_POPUP_DELAY_MS);
-  }
-
-  document.getElementById('launchPopupDismissX').addEventListener('click', closeLaunchPopup);
-  document.getElementById('launchPopupClose').addEventListener('click', closeLaunchPopup);
-  launchPopupOverlay.addEventListener('click', closeLaunchPopup);
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && launchPopup.classList.contains('open')) closeLaunchPopup();
-  });
-
   // Front-end only demo — doesn't actually send the email anywhere
   // yet. Connect to a real backend or a service like Mailchimp/Klaviyo
   // when you're ready.
