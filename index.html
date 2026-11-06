@@ -22,6 +22,7 @@
       <a href="#" class="navlink-shop">Collection</a>
       <a href="https://hitpay.shop/courtivabykash" target="_blank" rel="noopener">Shop</a>   
       <a href="#" data-page="About Us">About</a>
+      <a href="#" class="navlink-inquiries">Inquiries</a>
       <a href="#footer">Contact</a>
     </div>
     <div class="nav-right">
@@ -51,6 +52,7 @@
     <a href="#" class="navlink-shop">Collection</a>
     <a href="https://hitpay.shop/courtivabykash" target="_blank" rel="noopener">Shop</a>
     <a href="#" data-page="About Us">About</a>
+    <a href="#" class="navlink-inquiries">Inquiries</a>
     <a href="#footer">Contact</a>
   </div>
 </header>
@@ -267,7 +269,7 @@
     <!-- FOUNDER STORY: SPLIT IMAGE + TEXT -->
     <section class="ab-split" id="ab-story">
       <div class="ab-split-media reveal" data-reveal data-reveal-from="left">
-        <img src="media/images/About hero.png" alt="Woman on a tennis court holding a racket and ball">
+        <img src="media/images/about-hero.jpg" alt="Woman on a tennis court holding a racket and ball">
       </div>
       <div class="ab-split-text">
         <h2 class="reveal" data-reveal>From Singapore Courts to ESSEC Paris</h2>
@@ -754,8 +756,9 @@
 
 <!-- ================= PHILOSOPHY ================= -->
 <section class="philosophy-banner">
+  <p class="philosophy-label">Courtiva Promise</p>
   <p class="philosophy-text">
-    Courtiva Promise </br></br>We believe the future of luxury sportswear isn't about pushing harder. It's about recovering smarter &ndash; creating garments that care for the women who wear them. Where thoughtful design meets innovative textiles. Where performance meets well-being. Where luxury meets purpose.
+    We believe the future of luxury sportswear isn't about pushing harder. It's about recovering smarter &ndash; creating garments that care for the women who wear them. Where thoughtful design meets innovative textiles. Where performance meets well-being. Where luxury meets purpose.
   </p>
 
   <div class="philosophy-icons">
@@ -796,6 +799,77 @@
 </section>
 </div>
 <!-- ============= END HOME PAGE CONTENT ============= -->
+
+<!-- ================= INQUIRIES PAGE ================= -->
+<!-- Its own top-level section (like Shop/Product/Wishlist below), not
+     routed through the generic light-background "Pages" system that
+     About Us uses — this page intentionally uses its own dark theme,
+     so it needed full control rather than sharing that system's
+     styling. Toggled via showInquiries() in script.js. -->
+<main id="inquiriesContent" class="inquiries-page" hidden>
+  <div class="inquiries-wrap">
+    <div class="inquiries-intro">
+      <h1>Inquiries</h1>
+      <p>Have a question about an order, a wholesale or stockist opportunity, press, or a collaboration in mind? We'd love to hear from you.</p>
+
+      <div class="inquiries-info-card">
+        <div class="inquiries-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></div>
+        <div>
+          <div class="inquiries-info-label">E-Mail</div>
+          <div class="inquiries-info-value">care@courtiva.sg</div>
+        </div>
+      </div>
+      <div class="inquiries-info-card">
+        <div class="inquiries-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div>
+          <div class="inquiries-info-label">Location</div>
+          <div class="inquiries-info-value">Singapore</div>
+        </div>
+      </div>
+    </div>
+
+    <form class="inquiries-form" id="inquiriesForm">
+      <div class="inquiries-form-row">
+        <div class="inquiries-field">
+          <label for="inqName">Name <span>*</span></label>
+          <input type="text" id="inqName" name="name" required>
+        </div>
+        <div class="inquiries-field">
+          <label for="inqEmail">E-Mail <span>*</span></label>
+          <input type="email" id="inqEmail" name="email" required>
+        </div>
+      </div>
+      <div class="inquiries-form-row">
+        <div class="inquiries-field">
+          <label for="inqCompany">Company</label>
+          <input type="text" id="inqCompany" name="company">
+        </div>
+        <div class="inquiries-field">
+          <label for="inqPhone">Phone <span>*</span></label>
+          <input type="tel" id="inqPhone" name="phone" required>
+        </div>
+      </div>
+      <div class="inquiries-field">
+        <label for="inqType">Inquiry Type <span>*</span></label>
+        <select id="inqType" name="inquiryType" required>
+          <option value="">Select one…</option>
+          <option>General Inquiry</option>
+          <option>Order / Shipping Question</option>
+          <option>Wholesale / Stockist Opportunity</option>
+          <option>Press &amp; Media</option>
+          <option>Partnership / Collaboration</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="inquiries-field">
+        <label for="inqMessage">Message</label>
+        <textarea id="inqMessage" name="message" rows="6"></textarea>
+      </div>
+      <button type="submit" class="inquiries-submit" id="inquiriesSubmit">Send</button>
+      <p class="inquiries-status" id="inquiriesStatus" hidden></p>
+    </form>
+  </div>
+</main>
 
 <!-- ================= FOOTER ================= -->
 <footer id="footer">
