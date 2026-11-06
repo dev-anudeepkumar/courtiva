@@ -1,0 +1,17 @@
+{
+  "name": "courtiva-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Courtiva storefront: serves the static site (index.html, style.css, script.js, media/).",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "echo \"No build step needed: static site\""
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
