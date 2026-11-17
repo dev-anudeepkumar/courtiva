@@ -1019,17 +1019,19 @@ header.scrolled .burger svg{color:var(--ink);}
 /* ---------- HERO ---------- */
 .hero{
   position:relative;
-  /* Matches the hero photos' own 1350:700 aspect ratio, so object-fit:cover
-     below never actually needs to crop them — the whole photo is always
-     visible, just scaled up or down. This is what makes each slide's
-     button position accurate at every screen width: previously, height
-     was fixed to 100vh independent of width, so the visible crop of each
-     photo (and therefore where its own baked-in text landed) shifted
-     depending on the browser window's exact width-to-height ratio, which
-     is why the button drifted out of alignment at some sizes but not
-     others. If you use photos with a different aspect ratio later, this
-     value should be updated to match them. */
-  aspect-ratio:1350/700;
+  /* Fixed aspect-ratio (rather than a fixed height independent of width)
+     is what keeps each slide's caption position accurate at every screen
+     width — the visible crop of the photo, and therefore where its own
+     content lands, stays the same regardless of the browser window's
+     exact width-to-height ratio. 16:9 matches 3 of the current 5 hero
+     photos exactly (sena_coffee/viora_aurelia/viora_golf are
+     1672×941 = 16:9) and is close to the other 2 (cleo_zelie_roselle/
+     ZELIE are 1536×1024 = 3:2) — picked over the old 1350:700 (≈1.93:1)
+     specifically because it needs noticeably less upscaling/cropping to
+     fill this box on a wide monitor, which is what was making the
+     photos look soft/"stretched". If you swap in different photos
+     later, update this to whatever ratio matches them best. */
+  aspect-ratio:16/9;
   min-height:460px;
   overflow:hidden;
 }
