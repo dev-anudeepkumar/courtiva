@@ -303,6 +303,27 @@ function setActiveSection(section) {
   window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
 }
 
+// ---------- 8b) URL routing (keeps a reload / direct link on the right page) ----------
+// Without this, every navlink only ever changed in-memory JS state — the
+// address bar never moved off "/", so hitting refresh (or sharing/bookmarking
+// a link) always re-ran index.html from scratch and landed back on Home.
+// Each show*() function below now also writes a matching "#..." to the
+// address bar via history.pushState (no network request, no reload), and
+// routeFromHash() reads that same hash back on first load and on
+// back/forward navigation to call the matching show*() function again.
+// isRouting guards against routeFromHash's own calls to show*() re-pushing
+// the exact state that was just read, which would otherwise spam new
+// (identical) history entries every time the user hit Back.
+let isRouting = false;
+
+function navigateTo(hash) {
+  if (isRouting) return;
+  const target = hash ? '#' + hash : location.pathname + location.search;
+  if (location.hash !== (hash ? '#' + hash : '')) {
+    history.pushState(null, '', target);
+  }
+}
+
 function showPage(pageName) {
   pageEyebrow.textContent = 'Pages';
   pageTitle.textContent = pageName;
@@ -317,19 +338,48 @@ function showPage(pageName) {
 
   setActiveSection('page');
   initScrollReveal();
+  navigateTo('page/' + encodeURIComponent(pageName));
 }
 
 function showHome() {
   setActiveSection('home');
+  navigateTo('');
 }
 
 function showShop() {
   setActiveSection('shop');
+  navigateTo('shop');
 }
 
 function showInquiries() {
   setActiveSection('inquiries');
+  navigateTo('inquiries');
 }
+
+// Reads the current "#..." hash and shows whichever section it points to —
+// called once on first load (so a refresh or a direct/bookmarked link with
+// a hash lands on the right page instead of Home) and again on every
+// browser Back/Forward (the "popstate" listener below), so those buttons
+// move between sections instead of leaving the page stuck.
+function routeFromHash() {
+  const raw = location.hash.slice(1);
+  isRouting = true;
+  if (!raw || raw === 'home') {
+    showHome();
+  } else if (raw === 'shop') {
+    showShop();
+  } else if (raw === 'inquiries') {
+    showInquiries();
+  } else if (raw.indexOf('page/') === 0) {
+    const pageName = decodeURIComponent(raw.slice('page/'.length));
+    showPage(pageName);
+  } else {
+    showHome();
+  }
+  isRouting = false;
+}
+
+window.addEventListener('popstate', routeFromHash);
 
 // Targets any <a data-page="..."> link, not just ones inside a dropdown —
 // this is what the header's "About Us" link uses now that "Pages" isn't
@@ -1454,3 +1504,13 @@ if (inquiriesForm) {
     }
   });
 }
+
+
+// ---------- Initial route ----------
+// Runs once, after everything above has finished defining itself and wiring
+// up listeners. If the page was opened with a hash already in the address
+// bar (a refresh on a sub-page, or a bookmarked/shared link), this moves
+// off the default Home state to match it; with no hash, routeFromHash()
+// simply calls showHome(), which is a no-op on top of the already-visible
+// home markup.
+routeFromHash();
